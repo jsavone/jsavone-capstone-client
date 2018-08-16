@@ -4,7 +4,7 @@ import './App.css';
 
 class App extends Component {
   render() {
-    console.log(this.state)
+    console.log(this.props.recipes)
     return (
       <div className="App">
         This is my Capstone!
