@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { removeIngredient, removeCategory } from '../../redux/actions'
 import { withStyles } from '@material-ui/core/styles';
 import NavBar from '../NavBar'
+import AdminEditRecipeDetails from './AdminEditRecipeDetails'
 import AdminAddIngredients from './AdminAddIngredients'
 import AdminAddCategories from './AdminAddCategories'
+import AdminCreateBar from './AdminCreateBar'
+import { Link } from 'react-router-dom'
 
 const styles = theme => ({
   root: {
@@ -26,7 +30,10 @@ const styles = theme => ({
   },
   directions: {
     whiteSpace: 'pre-line'
-  }
+  },
+    remove: {
+      cursor: 'pointer'
+  },
 
 });
 
@@ -37,30 +44,27 @@ class AdminEditRecipe extends Component{
 const { classes } = this.props;
 
 let currIngredients = []
-let ingredientsList = ''
 let currCategories = []
 
 let thisRecipe = {...this.props.recipes.filter(recipe=> recipe._id === this.props.match.params.id)[0]}
 
 if (thisRecipe.ingredients !== undefined) {
-  currIngredients = [...thisRecipe.ingredients]
-  ingredientsList = currIngredients.map(ing => <li key={ing._id}>{ing.amount} {ing.ingredientId.unit} - {ing.ingredientId.name}</li>)
+  currIngredients = [...thisRecipe.ingredients].map(ing => <li key={ing._id}>{ing.amount} {ing.ingredientId.unit} - {ing.ingredientId.name} - <span className={classes.remove} onClick={()=>this.props.removeIngredient({recipeId: thisRecipe._id, id: ing._id})}>remove</span></li>)
 }
 
 if (thisRecipe.categories !== undefined) {
-  currCategories = [...thisRecipe.categories].map(cat=> <li key={cat._id}>{cat.category}</li>)
+  currCategories = [...thisRecipe.categories].map(cat=> <li key={cat._id}>{cat.category} - <span className={classes.remove} onClick={()=>this.props.removeCategory({recipeId: thisRecipe._id, id: cat._id})}>remove</span></li>)
 }
-
-console.log(currCategories)
-
-
     return(
       <div>
         <NavBar />
+        <AdminCreateBar />
+        <Link to={`/admin/${this.props.match.params.admin_email}`}>Back to Recipe List</Link>
         <h1>{thisRecipe.title}</h1>
         <img className={classes.img} src={thisRecipe.img} alt={thisRecipe.title} />
+        <AdminEditRecipeDetails recipe={thisRecipe} />
         <h3>Current Ingredients</h3>
-        {ingredientsList}
+        {currIngredients}
         <AdminAddIngredients recipeId={thisRecipe._id}/>
 
         <h3>Current Categories</h3>
@@ -80,7 +84,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-
+  removeIngredient,
+  removeCategory
 }, dispatch)
 
 const AdminEditRecipeConnect = connect(mapStateToProps, mapDispatchToProps)(AdminEditRecipe)

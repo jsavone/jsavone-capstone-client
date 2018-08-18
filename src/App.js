@@ -21,7 +21,7 @@ class App extends Component {
           <Route exact={true} path='/recipes/:user_id' component={RecipePicker} />
           <Route exact={true} path='/admin' component={AdminLogin} />
           <Route exact={true} path='/admin/:admin_email' component={AdminPanel} />
-          <Route exact={true} path='/admin/recipe/:id' component={AdminEditRecipe} />
+          <Route exact={true} path='/admin/:admin_email/recipe/:id' component={AdminEditRecipe} />
           <Route path='*' component={Miss} />
         </Switch>
         </div>

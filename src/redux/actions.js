@@ -9,8 +9,11 @@ export const USER_LOGIN = 'USER_LOGIN'
 export const CREATE_RECIPE = 'CREATE_RECIPE'
 export const CREATE_CATEGORY = 'CREATE_CATEGORY'
 export const CREATE_INGREDIENT = 'CREATE_INGREDIENT'
+export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT'
+export const REMOVE_CATEGORY = 'REMOVE_CATEGORY'
 export const ADD_INGREDIENT = 'ADD_INGREDIENT'
 export const ADD_CATEGORY = 'ADD_CATEGORY'
+export const EDIT_RECIPE = 'EDIT_RECIPE'
 
 export const fetchRecipes = () => {
   return( dispatch) => {
@@ -138,6 +141,42 @@ export const addCategory = (category) => {
     .then((response) => {
       dispatch({
         type: ADD_CATEGORY,
+        payload: response.data
+      })
+    })
+  }
+}
+
+export const removeIngredient = (ingredient) => {
+  return( dispatch) => {
+    axios.patch(`http://localhost:8000/recipes/ingredient/remove/${ingredient.recipeId}/${ingredient.id}`)
+    .then((response) => {
+      dispatch({
+        type: REMOVE_INGREDIENT,
+        payload: response.data
+      })
+    })
+  }
+}
+
+export const removeCategory = (category) => {
+  return( dispatch) => {
+    axios.patch(`http://localhost:8000/recipes/categories/remove/${category.recipeId}/${category.id}`)
+    .then((response) => {
+      dispatch({
+        type: REMOVE_CATEGORY,
+        payload: response.data
+      })
+    })
+  }
+}
+
+export const editRecipe = (recipe) => {
+  return( dispatch) => {
+    axios.patch('http://localhost:8000/recipes', recipe)
+    .then((response) => {
+      dispatch({
+        type: EDIT_RECIPE,
         payload: response.data
       })
     })

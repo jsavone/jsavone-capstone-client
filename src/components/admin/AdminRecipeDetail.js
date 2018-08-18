@@ -61,7 +61,7 @@ render() {
            variant="contained"
            color="primary"
            className={classes.button}
-           href={"/admin/recipe/"+thisRecipe._id}>
+           href={`/admin/${this.props.admin}/recipe/${thisRecipe._id}`}>
              Edit Recipe
           </Button>
           </Paper>

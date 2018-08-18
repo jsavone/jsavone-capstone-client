@@ -16,10 +16,8 @@ const styles = theme => ({
 });
 
 const AdminRecipeList = (props) => {
-
 const { classes } = props;
-console.log(props.recipes)
-  let recipes = props.recipes.map(recipe => <AdminRecipeDetail key={recipe._id} recipe={recipe} />)
+  let recipes = props.recipes.map(recipe => <AdminRecipeDetail key={recipe._id} recipe={recipe} admin={props.admin}/>)
   return(
     <div className={classes.root}>
       <Grid container spacing={24}>

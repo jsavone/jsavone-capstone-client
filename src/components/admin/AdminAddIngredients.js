@@ -178,8 +178,11 @@ render() {
      this.props.ingredients.map(ingredient => {
        return suggestions.push({ label: ingredient.name })
      })
+
   let currIngredient = ''
-  this.state.name !== '' ? currIngredient = {...this.props.ingredients.filter(ingredient=> ingredient.name === this.state.name)[0]} : null
+  if (this.state.name !== '') {
+    currIngredient = {...this.props.ingredients.filter(ingredient=> ingredient.name === this.state.name)[0]}
+  }
 
   const { classes } = this.props;
 
