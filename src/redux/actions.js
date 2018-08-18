@@ -121,7 +121,7 @@ export const createIngredient = (ingredient) => {
 
 export const addIngredient = (ingredient) => {
   return( dispatch) => {
-    axios.patch(`/recipes/ingredient/${ingredient.recipeId}/${ingredient.id}`)
+    axios.patch(`http://localhost:8000/recipes/ingredient/${ingredient.recipeId}/${ingredient.id}/${ingredient.amount}`)
     .then((response) => {
       dispatch({
         type: ADD_INGREDIENT,

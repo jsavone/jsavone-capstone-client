@@ -11,58 +11,147 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Autosuggest from 'react-autosuggest';
+import match from 'autosuggest-highlight/match';
+import parse from 'autosuggest-highlight/parse';
+import Paper from '@material-ui/core/Paper';
+
+let suggestions = []
+
+function renderInput(inputProps) {
+  const { classes, ref, ...other } = inputProps;
+
+  return (
+    <TextField
+      fullWidth
+      InputProps={{
+        inputRef: ref,
+        classes: {
+          input: classes.input,
+        },
+        ...other,
+      }}
+    />
+  );
+}
+
+function renderSuggestion(suggestion, { query, isHighlighted }) {
+  const matches = match(suggestion.label, query);
+  const parts = parse(suggestion.label, matches);
+
+  return (
+    <MenuItem selected={isHighlighted} component="div">
+      <div>
+        {parts.map((part, index) => {
+          return part.highlight ? (
+            <span key={String(index)} style={{ fontWeight: 500 }}>
+              {part.text}
+            </span>
+          ) : (
+            <strong key={String(index)} style={{ fontWeight: 300 }}>
+              {part.text}
+            </strong>
+          );
+        })}
+      </div>
+    </MenuItem>
+  );
+}
+
+function renderSuggestionsContainer(options) {
+  const { containerProps, children } = options;
+
+  return (
+    <Paper {...containerProps} square>
+      {children}
+    </Paper>
+  );
+}
+
+function getSuggestionValue(suggestion) {
+  return suggestion.label;
+}
+
+function getSuggestions(value) {
+  const inputValue = value.trim().toLowerCase();
+  const inputLength = inputValue.length;
+  let count = 0;
+
+  return inputLength === 0
+    ? []
+    : suggestions.filter(suggestion => {
+        const keep =
+          count < 5 && suggestion.label.toLowerCase().slice(0, inputLength) === inputValue;
+
+        if (keep) {
+          count += 1;
+        }
+
+        return keep;
+      });
+}
 
 const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    width: '100%',
-    marginTop: theme.spacing.unit * 3,
-    overflowX: 'auto',
-  },
-  img: {
-    maxHeight: 250,
-  },
-  table: {
-  width: '100%',
-  },
-  claim: {
+  container: {
     marginTop: 20,
+    marginBottom: 20,
+    display: 'flex',
+    flexWrap: 'wrap',
+    width: 1000
+  },
+
+  suggestionsContainerOpen: {
+    position: 'absolute',
+    zIndex: 1,
+    marginTop: theme.spacing.unit,
+    left: 0,
+    right: 0,
+  },
+  suggestion: {
+    display: 'block',
+  },
+  suggestionsList: {
+    margin: 0,
+    padding: 0,
+    listStyleType: 'none',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 1000,
+  },
+  menu: {
+    width: 1000,
   },
 });
-
-const unit = [
-  {
-    value: 'tsp',
-    label: 'tsp',
-  },
-  {
-    value: 'tbsp',
-    label: 'tbsp',
-  },
-  {
-    value: 'oz',
-    label: 'oz',
-  },
-  {
-    value: 'fl oz',
-    label: 'fl oz',
-  },
-];
 
 class AdminAddIngredients extends Component {
 
   state = {
-  open: false,
-  ingredientOpen: false,
-  name: '',
-  unit: ''
-};
+    suggestions: [],
+    open: false,
+    ingredientOpen: false,
+    name: '',
+    amount: 1
+  }
 
-handleChange = name => event => {
-   this.setState({
-     [name]: event.target.value,
-   });
- };
+  handleSuggestionsFetchRequested = ({ value }) => {
+     this.setState({
+       suggestions: getSuggestions(value),
+     });
+   };
+
+   handleSuggestionsClearRequested = () => {
+     this.setState({
+       suggestions: [],
+     });
+   };
+
+  handleChange = (event, { newValue }) => {
+    this.setState({
+      name: newValue,
+    });
+  };
 
 handleClickOpenIngredient = () => {
   this.setState({ ingredientOpen: true });
@@ -72,18 +161,26 @@ handleCloseIngredient = () => {
   this.setState({ ingredientOpen: false });
 };
 
-handleSubmitIngredient = (prod, guest) => {
+handleSubmitIngredient = (id) => {
   this.setState({ ingredientOpen: false });
-  let newIngredient = {
-                        name: this.state.name,
-                        unit: this.state.unit,
-                      }
+  let ingredient = {
+                      recipeId: this.props.recipeId,
+                      id: id,
+                      amount: this.state.amount
+                    }
 
-  this.props.addIngredient(newIngredient)
-  this.setState({name: '', unit: ''})
+  this.props.addIngredient(ingredient)
+  this.setState({name: '', amount: ''})
 };
 
 render() {
+  suggestions = []
+     this.props.ingredients.map(ingredient => {
+       return suggestions.push({ label: ingredient.name })
+     })
+  let currIngredient = ''
+  this.state.name !== '' ? currIngredient = {...this.props.ingredients.filter(ingredient=> ingredient.name === this.state.name)[0]} : null
+  
   const { classes } = this.props;
 
   return (
@@ -100,44 +197,44 @@ render() {
           <DialogContentText>
             {`Create a new ingredient that can be used with existing recipes.`}
           </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label={"Ingredient Name"}
-            type="text"
-            color="default"
-            onChange={(e)=>this.setState({name: e.target.value})}
-            value={this.state.name}
-            fullWidth
+
+          <Autosuggest
+             theme={{
+               container: classes.container,
+               suggestionsContainerOpen: classes.suggestionsContainerOpen,
+               suggestionsList: classes.suggestionsList,
+               suggestion: classes.suggestion,
+             }}
+             renderInputComponent={renderInput}
+             suggestions={this.state.suggestions}
+             onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
+             onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
+             renderSuggestionsContainer={renderSuggestionsContainer}
+             getSuggestionValue={getSuggestionValue}
+             renderSuggestion={renderSuggestion}
+             inputProps={{
+               classes,
+               placeholder: 'Search Ingredients by Name',
+               value: this.state.name,
+               onChange: this.handleChange,
+             }}
           />
 
-          <TextField
-         id="select-unit"
-         select
-         label="Unit of Measurement"
-         className={classes.textField}
-         value={this.state.unit}
-         onChange={this.handleChange('unit')}
-         SelectProps={{
-           MenuProps: {
-             className: classes.menu,
-           },
-         }}
-         margin="dense"
-         fullWidth
-       >
-         {unit.map(option => (
-           <MenuItem key={option.value} value={option.value}>
-             {option.label}
-           </MenuItem>
-         ))}
-       </TextField>
+          {currIngredient !== '' ? <h3>per {currIngredient.unit}</h3> : null}
 
+          <TextField
+            margin="dense"
+            id="name"
+            label={"Amount"}
+            type="number"
+            color="default"
+            onChange={(e)=>this.setState({amount: e.target.value})}
+            value={this.state.amount}
+            fullWidth
+          />
         </DialogContent>
         <DialogActions>
-
-          <Button onClick={()=>this.handleSubmitIngredient()} color="primary">
+          <Button onClick={()=>this.handleSubmitIngredient(currIngredient._id)} color="primary">
             Add Ingredient
           </Button>
         </DialogActions>
