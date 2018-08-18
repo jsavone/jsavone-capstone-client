@@ -10,6 +10,7 @@ export const CREATE_RECIPE = 'CREATE_RECIPE'
 export const CREATE_CATEGORY = 'CREATE_CATEGORY'
 export const CREATE_INGREDIENT = 'CREATE_INGREDIENT'
 export const ADD_INGREDIENT = 'ADD_INGREDIENT'
+export const ADD_CATEGORY = 'ADD_CATEGORY'
 
 export const fetchRecipes = () => {
   return( dispatch) => {
@@ -125,6 +126,18 @@ export const addIngredient = (ingredient) => {
     .then((response) => {
       dispatch({
         type: ADD_INGREDIENT,
+        payload: response.data
+      })
+    })
+  }
+}
+
+export const addCategory = (category) => {
+  return( dispatch) => {
+    axios.patch(`http://localhost:8000/recipes/categories/${category.recipeId}/${category.id}`)
+    .then((response) => {
+      dispatch({
+        type: ADD_CATEGORY,
         payload: response.data
       })
     })

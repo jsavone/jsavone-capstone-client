@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { withStyles } from '@material-ui/core/styles';
 import NavBar from '../NavBar'
 import AdminAddIngredients from './AdminAddIngredients'
+import AdminAddCategories from './AdminAddCategories'
 
 const styles = theme => ({
   root: {
@@ -37,6 +38,7 @@ const { classes } = this.props;
 
 let currIngredients = []
 let ingredientsList = ''
+let currCategories = []
 
 let thisRecipe = {...this.props.recipes.filter(recipe=> recipe._id === this.props.match.params.id)[0]}
 
@@ -45,7 +47,12 @@ if (thisRecipe.ingredients !== undefined) {
   ingredientsList = currIngredients.map(ing => <li key={ing._id}>{ing.amount} {ing.ingredientId.unit} - {ing.ingredientId.name}</li>)
 }
 
-console.log("this recipe: ", currIngredients)
+if (thisRecipe.categories !== undefined) {
+  currCategories = [...thisRecipe.categories].map(cat=> <li key={cat._id}>{cat.category}</li>)
+}
+
+console.log(currCategories)
+
 
     return(
       <div>
@@ -55,6 +62,10 @@ console.log("this recipe: ", currIngredients)
         <h3>Current Ingredients</h3>
         {ingredientsList}
         <AdminAddIngredients recipeId={thisRecipe._id}/>
+
+        <h3>Current Categories</h3>
+        {currCategories}
+        <AdminAddCategories recipeId={thisRecipe._id}/>
       </div>
     )
   }

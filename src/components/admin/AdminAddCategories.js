@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles';
 import { bindActionCreators } from 'redux'
-import { addIngredient } from '../../redux/actions'
+import { addCategory } from '../../redux/actions'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -125,14 +125,13 @@ const styles = theme => ({
   },
 });
 
-class AdminAddIngredients extends Component {
+class AdminAddCategories extends Component {
 
   state = {
     suggestions: [],
     open: false,
     ingredientOpen: false,
-    name: '',
-    amount: 1
+    category: '',
   }
 
   handleSuggestionsFetchRequested = ({ value }) => {
@@ -149,7 +148,7 @@ class AdminAddIngredients extends Component {
 
   handleChange = (event, { newValue }) => {
     this.setState({
-      name: newValue,
+      category: newValue,
     });
   };
 
@@ -161,41 +160,40 @@ handleCloseIngredient = () => {
   this.setState({ ingredientOpen: false });
 };
 
-handleSubmitIngredient = (id) => {
+handleSubmitCategory = (id) => {
   this.setState({ ingredientOpen: false });
-  let ingredient = {
+  let category = {
                       recipeId: this.props.recipeId,
                       id: id,
-                      amount: this.state.amount
                     }
 
-  this.props.addIngredient(ingredient)
-  this.setState({name: '', amount: ''})
+  this.props.addCategory(category)
+  this.setState({category: ''})
 };
 
 render() {
   suggestions = []
-     this.props.ingredients.map(ingredient => {
-       return suggestions.push({ label: ingredient.name })
+     this.props.categories.map(category => {
+       return suggestions.push({ label: category.category })
      })
-  let currIngredient = ''
-  this.state.name !== '' ? currIngredient = {...this.props.ingredients.filter(ingredient=> ingredient.name === this.state.name)[0]} : null
+  let currCategory = ''
+  this.state.category !== '' ? currCategory = {...this.props.categories.filter(category=> category.category === this.state.category)[0]} : null
 
   const { classes } = this.props;
 
   return (
     <div>
-      <Button onClick={this.handleClickOpenIngredient} className={classes.claim} color="primary">Add Ingredient</Button>
+      <Button onClick={this.handleClickOpenIngredient} className={classes.claim} color="primary">Add Categories</Button>
 
       <Dialog
         open={this.state.ingredientOpen}
         onClose={this.handleCloseIngredient}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Add Ingredient</DialogTitle>
+        <DialogTitle id="form-dialog-title">Add Categories</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {`Add ingredient to the existing recipe listing.`}
+            {`Add categories to your existing recipe.`}
           </DialogContentText>
 
           <Autosuggest
@@ -214,28 +212,16 @@ render() {
              renderSuggestion={renderSuggestion}
              inputProps={{
                classes,
-               placeholder: 'Search Ingredients by Name',
-               value: this.state.name,
+               placeholder: 'Search Categories by Name',
+               value: this.state.category,
                onChange: this.handleChange,
              }}
           />
 
-          {currIngredient !== '' ? <h3>per {currIngredient.unit}</h3> : null}
-
-          <TextField
-            margin="dense"
-            id="name"
-            label={"Amount"}
-            type="number"
-            color="default"
-            onChange={(e)=>this.setState({amount: e.target.value})}
-            value={this.state.amount}
-            fullWidth
-          />
         </DialogContent>
         <DialogActions>
-          <Button onClick={()=>this.handleSubmitIngredient(currIngredient._id)} color="primary">
-            Add Ingredient
+          <Button onClick={()=>this.handleSubmitCategory(currCategory._id)} color="primary">
+            Add Category
           </Button>
         </DialogActions>
       </Dialog>
@@ -247,14 +233,14 @@ render() {
 
 const mapStateToProps = state => {
   return{
-    ingredients: state.ingredients
+    categories: state.categories
   }
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  addIngredient
+  addCategory
 }, dispatch)
 
-const AdminAddIngredientsConnect = connect(mapStateToProps, mapDispatchToProps)(AdminAddIngredients)
+const AdminAddCategoriesConnect = connect(mapStateToProps, mapDispatchToProps)(AdminAddCategories)
 
-export default withStyles(styles)(AdminAddIngredientsConnect)
+export default withStyles(styles)(AdminAddCategoriesConnect)
