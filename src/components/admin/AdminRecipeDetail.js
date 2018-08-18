@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import lightGreen from '@material-ui/core/colors/lightGreen';
 
-
 const theme = createMuiTheme({
   palette: {
     primary: lightGreen,
@@ -39,36 +38,32 @@ const styles = theme => ({
 
 });
 
-
 class AdminRecipeDetail extends Component {
 
-render() {
-  const { classes } = this.props;
+  render() {
+    const { classes } = this.props;
 
-  let thisRecipe = {...this.props.recipe}
-  return (
-        <Grid item xs={12} sm={6}>
-        <MuiThemeProvider theme={theme} >
-          <Paper className={classes.paper}>
-          <p><img className={classes.img} src={thisRecipe.img} alt={thisRecipe.title} /></p>
-          <Typography variant="subheading" gutterBottom>
-              {thisRecipe.title}
-          </Typography>
-          <Typography className={classes.directions} variant="title" gutterBottom>
-              {thisRecipe.directions}
-          </Typography>
-          <Button
-           variant="contained"
-           color="primary"
-           className={classes.button}
-           href={`/admin/${this.props.admin}/recipe/${thisRecipe._id}`}>
-             Edit Recipe
-          </Button>
-          </Paper>
-          </MuiThemeProvider >
-        </Grid>
-  )
-}
+    let thisRecipe = {...this.props.recipe}
+    return (
+          <Grid item xs={12} sm={6}>
+          <MuiThemeProvider theme={theme} >
+            <Paper className={classes.paper}>
+            <p><img className={classes.img} src={thisRecipe.img} alt={thisRecipe.title} /></p>
+            <Typography variant="subheading" gutterBottom>
+                {thisRecipe.title}
+            </Typography>
+            <Button
+             variant="contained"
+             color="primary"
+             className={classes.button}
+             href={`/admin/${this.props.admin}/recipe/${thisRecipe._id}`}>
+               Edit Recipe
+            </Button>
+            </Paper>
+            </MuiThemeProvider >
+          </Grid>
+    )
+  }
 }
 
 const mapStateToProps = state => {

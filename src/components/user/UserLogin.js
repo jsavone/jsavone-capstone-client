@@ -73,7 +73,7 @@ class UserLogin extends React.Component {
           color="primary"
           className={classes.button}
           onClick={()=>this.props.userLogin(this.state)}
-          href={"/recipes"}>
+          href={"/recipes/"+this.state.email}>
             Login
           </Button>
       </div>

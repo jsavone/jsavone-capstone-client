@@ -1,14 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import MenuIcon from '@material-ui/icons/CalendarTodayRounded';
+import AccountCircle from '@material-ui/icons/AccountCircleRounded';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
 
 const styles = {
   root: {
@@ -18,8 +20,10 @@ const styles = {
     flexGrow: 1,
   },
   menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
+    marginRight: 0,
+  },
+  list: {
+    width: 250,
   },
 };
 
@@ -27,6 +31,13 @@ class NavBar extends React.Component {
   state = {
     auth: true,
     anchorEl: null,
+    right: false,
+  };
+
+  toggleDrawer = (side, open) => () => {
+    this.setState({
+      right: open,
+    });
   };
 
   handleChange = (event, checked) => {
@@ -46,14 +57,19 @@ class NavBar extends React.Component {
     const { auth, anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
+    const sideList = (
+      <div className={classes.list}>
+        <List>Nothing</List>
+        <Divider />
+        <List>Nothing</List>
+      </div>
+    );
+
     return (
       <div className={classes.root}>
 
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton>
             <Typography variant="title" color="inherit" className={classes.flex}>
               Preptastic
             </Typography>
@@ -84,17 +100,27 @@ class NavBar extends React.Component {
                   <MenuItem onClick={this.handleClose}>Profile</MenuItem>
                   <MenuItem onClick={this.handleClose}>My account</MenuItem>
                 </Menu>
+                <IconButton onClick={this.toggleDrawer('right', true)} className={classes.menuButton} color="inherit" aria-label="Menu">
+                  <MenuIcon />
+                </IconButton>
               </div>
             )}
           </Toolbar>
         </AppBar>
+        <Drawer anchor="right" open={this.state.right} onClose={this.toggleDrawer('right', false)}>
+          <div
+            tabIndex={0}
+            role="button"
+            onClick={this.toggleDrawer('right', false)}
+            onKeyDown={this.toggleDrawer('right', false)}
+          >
+            {sideList}
+          </div>
+        </Drawer>
+
       </div>
     );
   }
 }
-
-NavBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(NavBar);
