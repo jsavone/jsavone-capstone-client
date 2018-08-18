@@ -29,7 +29,7 @@ const styles = theme => ({
 });
 
 
-class UserLogin extends React.Component {
+class AdminLoginForm extends React.Component {
   state = {
     email: 'annasavone@gmail.com',
     password: 'pw',
@@ -37,12 +37,11 @@ class UserLogin extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.props)
     return (
       <div>
 
           <Typography variant="display1" className={classes.heading} gutterBottom>
-           User Login
+           Admin Login
           </Typography>
 
           <form className={classes.container} noValidate autoComplete="off">
@@ -73,7 +72,7 @@ class UserLogin extends React.Component {
           color="primary"
           className={classes.button}
           onClick={()=>this.props.userLogin(this.state)}
-          href={"/recipes"}>
+          href={"/admin/"+this.state.email}>
             Login
           </Button>
       </div>
@@ -81,18 +80,11 @@ class UserLogin extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    recipes: state.recipes,
-    users: state.users,
-    user: state.user,
-  }
-}
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   userLogin
 }, dispatch)
 
-const UserLoginConnect = connect(mapStateToProps, mapDispatchToProps)(UserLogin)
+const AdminLoginFormConnect = connect(null, mapDispatchToProps)(AdminLoginForm)
 
-export default withStyles(styles)(UserLoginConnect);
+export default withStyles(styles)(AdminLoginFormConnect);
