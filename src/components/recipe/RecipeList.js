@@ -28,13 +28,19 @@ const styles = theme => ({
 const RecipeList = (props) => {
   const { classes } = props;
 
+  let catFilter = [...props.recipes]
+
+  if (props.category !== '') {
+    catFilter = [...props.recipes.filter(r=> r.categories.filter(c=> c.category === props.category).length > 0)]
+  }
+
   return (
     <div className={classes.root}>
       <GridList cellHeight={180} className={classes.gridList}>
         <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
           <ListSubheader component="div">Top Recipes</ListSubheader>
         </GridListTile>
-        {props.recipes.filter(recipe=>recipe.title.toLowerCase().includes(props.search.toLowerCase())).map(tile => (
+        {catFilter.filter(recipe=>recipe.title.toLowerCase().includes(props.search.toLowerCase())).map(tile => (
           <GridListTile key={tile.img}>
             <img src={tile.img} alt={tile.title} />
             <GridListTileBar

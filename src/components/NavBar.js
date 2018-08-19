@@ -4,7 +4,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/CalendarTodayRounded';
+import CalendarIcon from '@material-ui/icons/CalendarTodayRounded';
+import ShoppingCart from '@material-ui/icons/ShoppingCartRounded';
 import AccountCircle from '@material-ui/icons/AccountCircleRounded';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
@@ -22,7 +23,12 @@ const styles = {
   menuButton: {
     marginRight: 0,
   },
-  list: {
+  leftList: {
+    marginLeft: 7,
+    width: 250,
+  },
+  rightList: {
+    marginLeft: 7,
     width: 250,
   },
 };
@@ -32,11 +38,12 @@ class NavBar extends React.Component {
     auth: true,
     anchorEl: null,
     right: false,
+    left: false,
   };
 
   toggleDrawer = (side, open) => () => {
     this.setState({
-      right: open,
+      [side]: open,
     });
   };
 
@@ -57,8 +64,20 @@ class NavBar extends React.Component {
     const { auth, anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
-    const sideList = (
-      <div className={classes.list}>
+    const rightSideList = (
+      <div className={classes.rightList}>
+        <h3>Food Plan</h3>
+        <Divider />
+        <List>Nothing</List>
+        <Divider />
+        <List>Nothing</List>
+      </div>
+    );
+
+    const leftSideList = (
+      <div className={classes.leftList}>
+        <h3>Shopping List</h3>
+        <Divider />
         <List>Nothing</List>
         <Divider />
         <List>Nothing</List>
@@ -100,8 +119,11 @@ class NavBar extends React.Component {
                   <MenuItem onClick={this.handleClose}>Profile</MenuItem>
                   <MenuItem onClick={this.handleClose}>My account</MenuItem>
                 </Menu>
+                <IconButton onClick={this.toggleDrawer('left', true)} className={classes.menuButton} color="inherit" aria-label="Menu">
+                  <ShoppingCart />
+                </IconButton>
                 <IconButton onClick={this.toggleDrawer('right', true)} className={classes.menuButton} color="inherit" aria-label="Menu">
-                  <MenuIcon />
+                  <CalendarIcon />
                 </IconButton>
               </div>
             )}
@@ -114,7 +136,18 @@ class NavBar extends React.Component {
             onClick={this.toggleDrawer('right', false)}
             onKeyDown={this.toggleDrawer('right', false)}
           >
-            {sideList}
+            {rightSideList}
+          </div>
+        </Drawer>
+
+        <Drawer anchor="left" open={this.state.left} onClose={this.toggleDrawer('left', false)}>
+          <div
+            tabIndex={0}
+            role="button"
+            onClick={this.toggleDrawer('left', false)}
+            onKeyDown={this.toggleDrawer('left', false)}
+          >
+            {leftSideList}
           </div>
         </Drawer>
 
