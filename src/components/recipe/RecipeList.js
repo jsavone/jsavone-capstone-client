@@ -47,7 +47,7 @@ const RecipeList = (props) => {
               title={tile.title}
               subtitle={<span>Cook time: {tile.cookTime}</span>}
               actionIcon={
-                <IconButton className={classes.icon}>
+                <IconButton className={classes.icon} href={tile._id}>
                   <InfoIcon />
                 </IconButton>
               }

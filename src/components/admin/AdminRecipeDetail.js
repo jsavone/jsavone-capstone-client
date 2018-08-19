@@ -27,7 +27,11 @@ const styles = theme => ({
     color: theme.palette.text.secondary,
   },
   img: {
-    maxHeight: 250,
+    width:  400,
+    height: 300,
+    backgroundPosition:'50% 50%',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
   },
   table: {
   width: '100%',
