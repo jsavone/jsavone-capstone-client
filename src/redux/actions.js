@@ -14,6 +14,8 @@ export const REMOVE_CATEGORY = 'REMOVE_CATEGORY'
 export const ADD_INGREDIENT = 'ADD_INGREDIENT'
 export const ADD_CATEGORY = 'ADD_CATEGORY'
 export const EDIT_RECIPE = 'EDIT_RECIPE'
+export const ADD_MEAL = 'ADD_MEAL'
+export const REMOVE_MEAL = 'REMOVE_MEAL'
 
 export const fetchRecipes = () => {
   return( dispatch) => {
@@ -177,6 +179,30 @@ export const editRecipe = (recipe) => {
     .then((response) => {
       dispatch({
         type: EDIT_RECIPE,
+        payload: response.data
+      })
+    })
+  }
+}
+
+export const addMeal = (recipe) => {
+  return( dispatch) => {
+    axios.patch(`http://localhost:8000/users/add/${recipe.user_id}/${recipe.meal}/${recipe.recipe_id}`)
+    .then((response) => {
+      dispatch({
+        type: ADD_MEAL,
+        payload: response.data
+      })
+    })
+  }
+}
+
+export const removeMeal = (recipe) => {
+  return( dispatch) => {
+    axios.patch(`http://localhost:8000/users/remove/${recipe.user_id}/${recipe.meal}/${recipe.recipe_id}`)
+    .then((response) => {
+      dispatch({
+        type: REMOVE_MEAL,
         payload: response.data
       })
     })

@@ -112,7 +112,7 @@ render() {
             fullWidth
           />
 
-          <TextField
+        <TextField
          id="select-unit"
          select
          label="Unit of Measurement"
@@ -126,7 +126,7 @@ render() {
          }}
          margin="dense"
          fullWidth
-       >
+        >
          {unit.map(option => (
            <MenuItem key={option.value} value={option.value}>
              {option.label}

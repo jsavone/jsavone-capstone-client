@@ -1,4 +1,5 @@
 import React from 'react';
+import RecipeFoodList from './recipe/RecipeFoodList'
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -16,6 +17,7 @@ import Divider from '@material-ui/core/Divider';
 const styles = {
   root: {
     flexGrow: 1,
+    marginBottom:10,
   },
   flex: {
     flexGrow: 1,
@@ -29,8 +31,12 @@ const styles = {
   },
   rightList: {
     marginLeft: 7,
-    width: 250,
+    width: 350,
   },
+  rightHeading: {
+    marginTop: 8,
+    marginBottom:8,
+  }
 };
 
 class NavBar extends React.Component {
@@ -66,11 +72,9 @@ class NavBar extends React.Component {
 
     const rightSideList = (
       <div className={classes.rightList}>
-        <h3>Food Plan</h3>
+        <h3 className={classes.rightHeading}>Food Plan</h3>
         <Divider />
-        <List>Nothing</List>
-        <Divider />
-        <List>Nothing</List>
+        <RecipeFoodList user={this.props.user}/>
       </div>
     );
 
