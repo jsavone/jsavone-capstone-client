@@ -1,4 +1,4 @@
-import { FETCH_RECIPES, CREATE_RECIPE, ADD_INGREDIENT, ADD_CATEGORY, EDIT_RECIPE, REMOVE_INGREDIENT, REMOVE_CATEGORY } from './actions'
+import { FETCH_RECIPES, CREATE_RECIPE, ADD_INGREDIENT, ADD_CATEGORY, EDIT_RECIPE, REMOVE_INGREDIENT, REMOVE_CATEGORY, ADD_COMMENT } from './actions'
 
 let initialState = []
 
@@ -18,6 +18,8 @@ export default (state=initialState, action) => {
       return [...action.payload]
     case EDIT_RECIPE:
       return [...action.payload]
+    case ADD_COMMENT:
+      return [...action.payload]  
     default:
       return state
   }

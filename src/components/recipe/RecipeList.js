@@ -23,6 +23,10 @@ const styles = theme => ({
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
   },
+  link: {
+    textDecoration: 'none',
+    color: 'white',
+  }
 });
 
 const RecipeList = (props) => {
@@ -44,8 +48,8 @@ const RecipeList = (props) => {
           <GridListTile key={tile.img}>
             <img src={tile.img} alt={tile.title} />
             <GridListTileBar
-              title={tile.title}
-              subtitle={<span>Cook time: {tile.cookTime}</span>}
+              title={<a href={tile._id} className={classes.link}>{tile.title}</a>}
+              subtitle={<span><a href={tile._id} className={classes.link}>Cook time: {tile.cookTime}</a></span>}
               actionIcon={
                 <IconButton className={classes.icon} href={tile._id}>
                   <InfoIcon />

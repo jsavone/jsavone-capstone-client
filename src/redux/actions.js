@@ -16,6 +16,7 @@ export const ADD_CATEGORY = 'ADD_CATEGORY'
 export const EDIT_RECIPE = 'EDIT_RECIPE'
 export const ADD_MEAL = 'ADD_MEAL'
 export const REMOVE_MEAL = 'REMOVE_MEAL'
+export const ADD_COMMENT = 'ADD_COMMENT'
 
 export const fetchRecipes = () => {
   return( dispatch) => {
@@ -203,6 +204,18 @@ export const removeMeal = (recipe) => {
     .then((response) => {
       dispatch({
         type: REMOVE_MEAL,
+        payload: response.data
+      })
+    })
+  }
+}
+
+export const addComment = (comment) => {
+  return( dispatch) => {
+    axios.post('http://localhost:8000/comments', comment)
+    .then((response) => {
+      dispatch({
+        type: ADD_COMMENT,
         payload: response.data
       })
     })

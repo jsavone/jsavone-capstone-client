@@ -47,6 +47,10 @@ const unit = [
     value: 'fl oz',
     label: 'fl oz',
   },
+  {
+    value: 'each',
+    label: 'each',
+  },
 ];
 
 class AdminCreateIngredient extends Component {
