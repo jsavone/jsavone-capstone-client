@@ -17,6 +17,10 @@ const styles = theme => ({
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
   },
+  textField: {
+    width: '40%',
+    marginRight: 5,
+  }
 });
 
 const day = [
@@ -73,53 +77,52 @@ class RecipeDetail extends Component {
         <h2>{currRecipe.title}</h2>
         <iframe width="560" height="315" title={currRecipe.title} src={`https://www.youtube.com/embed/${currRecipe.video}?rel=0&amp;showinfo=0`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
 
-        <TextField
-         id="select-day"
-         select
-         label="Select Day"
-         className={classes.textField}
-         value={this.state.day}
-         onChange={this.handleChange('day')}
-         SelectProps={{
-           MenuProps: {
-             className: classes.menu,
-           },
-         }}
-         margin="dense"
-         fullWidth
-        >
-         {day.map(option => (
-           <MenuItem key={option.value} value={option.value}>
-             {option.label}
-           </MenuItem>
-         ))}
-       </TextField>
+          <form className={classes.container} noValidate autoComplete="off">
+            <TextField
+             id="select-day"
+             select
+             label="Select Day"
+             className={classes.textField}
+             value={this.state.day}
+             onChange={this.handleChange('day')}
+             SelectProps={{
+               MenuProps: {
+                 className: classes.menu,
+               },
+             }}
+             margin="dense"
+            >
+             {day.map(option => (
+               <MenuItem key={option.value} value={option.value}>
+                 {option.label}
+               </MenuItem>
+             ))}
+            </TextField>
 
-       <TextField
-        id="select-meal"
-        select
-        label="Select Meal"
-        className={classes.textField}
-        value={this.state.meal}
-        onChange={this.handleChange('meal')}
-        SelectProps={{
-          MenuProps: {
-            className: classes.menu,
-          },
-        }}
-        margin="dense"
-        fullWidth
-       >
-        {meal.map(option => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
-      </TextField>
-
-      <Button onClick={()=>this.handleSubmitMeal(currRecipe._id, currUser._id)} color="primary">
-        Add Meal to Plan
-      </Button>
+             <TextField
+              id="select-meal"
+              select
+              label="Select Meal"
+              className={classes.textField}
+              value={this.state.meal}
+              onChange={this.handleChange('meal')}
+              SelectProps={{
+                MenuProps: {
+                  className: classes.menu,
+                },
+              }}
+              margin="dense"
+             >
+              {meal.map(option => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <Button onClick={()=>this.handleSubmitMeal(currRecipe._id, currUser._id)}           color="primary">
+              Add Meal to Plan
+            </Button>
+        </form>
 
       </div>
     )

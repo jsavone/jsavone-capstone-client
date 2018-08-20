@@ -10,7 +10,7 @@ export default (state=initialState, action) => {
       let otherUsersAdd = state.filter(user => user._id !== action.payload._id)
       return [...otherUsersAdd, action.payload]
     case REMOVE_MEAL:
-      let otherUsersRemove = state.users.filter(user => user._id !== action.payload._id)
+      let otherUsersRemove = state.filter(user => user._id !== action.payload._id)
       return [...otherUsersRemove, action.payload]
     default:
       return state
