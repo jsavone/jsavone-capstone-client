@@ -1,5 +1,6 @@
 import React from 'react';
 import RecipeFoodList from './recipe/RecipeFoodList'
+import RecipeShoppingList from './recipe/RecipeShoppingList'
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,7 +12,6 @@ import AccountCircle from '@material-ui/icons/AccountCircleRounded';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 
 const styles = {
@@ -82,9 +82,7 @@ class NavBar extends React.Component {
       <div className={classes.leftList}>
         <h3>Shopping List</h3>
         <Divider />
-        <List>Nothing</List>
-        <Divider />
-        <List>Nothing</List>
+        <RecipeShoppingList user={this.props.user} />
       </div>
     );
 
