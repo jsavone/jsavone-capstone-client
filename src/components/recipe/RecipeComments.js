@@ -12,6 +12,8 @@ import Badge from '@material-ui/core/Badge';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import CommentIcon from '@material-ui/icons/CommentRounded';
 import TextField from '@material-ui/core/TextField';
+import Moment from 'react-moment';
+import Divider from '@material-ui/core/Divider';
 
 const styles = theme => ({
   root: {
@@ -37,11 +39,27 @@ const styles = theme => ({
   commentIcon: {
     marginBottom: 0,
   },
+  commentList: {
+    width: '100%',
+  },
+  date: {
+    fontSize: 12,
+  },
+  expansion: {
+    display: 'block',
+  },
+  divider: {
+    marginTop: 10,
+    marginBottom: 5,
+  },
+  commentButton: {
+    marginTop: 10,
+  }
 });
 
 class RecipeComments extends Component {
   state = {
-    comment: ''
+    comment: '',
   }
 
   SubmitHandler = (recipe, user) => {
@@ -51,6 +69,7 @@ class RecipeComments extends Component {
       user
     }
     this.props.addComment(newComment)
+    this.setState({comment: ''})
   }
 
   render() {
@@ -62,14 +81,20 @@ class RecipeComments extends Component {
     if (this.props.recipe.comments && this.props.recipe.comments.length > 0) {
       totalComments = this.props.recipe.comments.length
       commentList = this.props.recipe.comments.map(comment => {
-      let thisUser = {...this.props.users.filter(user=> user._id === comment.user)[0]}
-      return <div key={comment._id}> {comment.comment} by {thisUser.firstName+" "+thisUser.lastName}</div>
+        const dateToFormat = new Date(comment.created)
+        let thisUser = {...this.props.users.filter(user=> user._id === comment.user)[0]}
+        return <div key={comment._id}>
+                <p><strong>{thisUser.firstName+" "+thisUser.lastName}</strong> said:</p>
+                <p>{comment.comment}</p>
+                <p className={classes.date}><Moment fromNow ago>{dateToFormat}</Moment> ago</p>
+                <Divider className={classes.divider}/>
+              </div>
     })
     }
 
     return (
-
-        <ExpansionPanel>
+      <div>
+        <ExpansionPanel >
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>
             <Badge className={classes.margin} badgeContent={totalComments} color="primary">
@@ -78,8 +103,10 @@ class RecipeComments extends Component {
             &nbsp;&nbsp;COMMENTS
             </Typography>
           </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            {commentList}
+          <ExpansionPanelDetails className={classes.expansion}>
+            <div className={classes.commentList}>
+              {commentList.length > 0 ? commentList : <p>Be the first to comment!</p>}
+            </div>
             <form className={classes.container} noValidate autoComplete="off">
               <TextField
                 id="multiline-static"
@@ -93,6 +120,7 @@ class RecipeComments extends Component {
               />
               <Button
                 variant="contained"
+                className={classes.commentButton}
                 color="primary"
                 onClick={()=> this.SubmitHandler(this.props.recipe._id, this.props.user._id)}>
                 Submit Comment
@@ -101,6 +129,7 @@ class RecipeComments extends Component {
           </ExpansionPanelDetails>
         </ExpansionPanel>
 
+      </div>
     )
   }
 }

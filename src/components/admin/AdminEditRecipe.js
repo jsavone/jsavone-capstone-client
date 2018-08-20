@@ -9,6 +9,7 @@ import AdminAddIngredients from './AdminAddIngredients'
 import AdminAddCategories from './AdminAddCategories'
 import AdminCreateBar from './AdminCreateBar'
 import { Link } from 'react-router-dom'
+import Divider from '@material-ui/core/Divider';
 
 const styles = theme => ({
   root: {
@@ -45,6 +46,7 @@ const { classes } = this.props;
 
 let currIngredients = []
 let currCategories = []
+let currComments = []
 
 let thisRecipe = {...this.props.recipes.filter(recipe=> recipe._id === this.props.match.params.id)[0]}
 
@@ -54,6 +56,13 @@ if (thisRecipe.ingredients !== undefined) {
 
 if (thisRecipe.categories !== undefined) {
   currCategories = [...thisRecipe.categories].map(cat=> <li key={cat._id}>{cat.category} - <span className={classes.remove} onClick={()=>this.props.removeCategory({recipeId: thisRecipe._id, id: cat._id})}>remove</span></li>)
+}
+
+if (thisRecipe.comments) {
+  currComments = [...thisRecipe.comments].map(com=> {
+    let user = {...this.props.users.filter(user=> user._id === com.user)[0]}
+    return <div key={com._id}><p>{com.comment}</p><p>by {user.firstName} {user.lastName} - <span className={classes.remove} onClick={()=>this.props.removeCategory({recipeId: thisRecipe._id, id: com._id})}>remove</span></p><Divider /></div>
+  })
 }
     return(
       <div>
@@ -70,6 +79,9 @@ if (thisRecipe.categories !== undefined) {
         <h3>Current Categories</h3>
         {currCategories}
         <AdminAddCategories recipeId={thisRecipe._id}/>
+
+        <h3>Current Comments</h3>
+        {currComments}
       </div>
     )
   }
@@ -80,6 +92,7 @@ const mapStateToProps = state => {
     recipes: state.recipes,
     categories: state.categories,
     ingredients: state.ingredients,
+    users: state.users,
   }
 }
 
