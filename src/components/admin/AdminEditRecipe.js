@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { removeIngredient, removeCategory } from '../../redux/actions'
+import { removeIngredient, removeCategory, removeComment } from '../../redux/actions'
 import { withStyles } from '@material-ui/core/styles';
 import NavBar from '../NavBar'
 import AdminEditRecipeDetails from './AdminEditRecipeDetails'
@@ -61,7 +61,7 @@ if (thisRecipe.categories !== undefined) {
 if (thisRecipe.comments) {
   currComments = [...thisRecipe.comments].map(com=> {
     let user = {...this.props.users.filter(user=> user._id === com.user)[0]}
-    return <div key={com._id}><p>{com.comment}</p><p>by {user.firstName} {user.lastName} - <span className={classes.remove} onClick={()=>this.props.removeCategory({recipeId: thisRecipe._id, id: com._id})}>remove</span></p><Divider /></div>
+    return <div key={com._id}><p>{com.comment}</p><p>by {user.firstName} {user.lastName} - <span className={classes.remove} onClick={()=>this.props.removeComment({recipe: thisRecipe._id, comment: com._id})}>remove</span></p><Divider /></div>
   })
 }
     return(
@@ -98,7 +98,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   removeIngredient,
-  removeCategory
+  removeCategory,
+  removeComment
 }, dispatch)
 
 const AdminEditRecipeConnect = connect(mapStateToProps, mapDispatchToProps)(AdminEditRecipe)
