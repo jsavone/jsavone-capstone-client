@@ -34,7 +34,7 @@ const styles = theme => ({
     backgroundSize: 'cover',
   },
   table: {
-  width: '100%',
+    width: '100%',
   },
   directions: {
     whiteSpace: 'pre-line'

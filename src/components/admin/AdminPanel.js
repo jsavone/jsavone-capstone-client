@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import NavBar from '../NavBar'
+import AdminNavBar from './AdminNavBar'
 import AdminCreateBar from './AdminCreateBar'
 import AdminRecipeList from './AdminRecipeList'
 
@@ -10,7 +10,7 @@ render() {
 
   return (
     <div>
-      <NavBar />
+      <AdminNavBar />
       <AdminCreateBar />
       <AdminRecipeList admin={this.props.match.params.admin_email}/>
     </div>

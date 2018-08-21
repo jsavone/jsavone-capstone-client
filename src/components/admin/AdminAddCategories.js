@@ -18,6 +18,9 @@ const styles = theme => ({
   },
   select: {
     width: '100%'
+  },
+  claim: {
+    marginTop: 15,
   }
 });
 
@@ -70,7 +73,7 @@ render() {
 
   return (
     <div>
-      <Button onClick={this.handleClickOpenIngredient} className={classes.claim} color="primary">Add Categories</Button>
+      <Button onClick={this.handleClickOpenIngredient} className={classes.claim} variant="contained" color="primary">Add Categories</Button>
 
       <Dialog
         open={this.state.ingredientOpen}
@@ -107,7 +110,7 @@ render() {
 
         </DialogContent>
         <DialogActions>
-          <Button onClick={()=>this.handleSubmitCategory(currCategory._id)} color="primary">
+          <Button onClick={()=>this.handleSubmitCategory(currCategory._id)} variant="contained" color="primary">
             Add Category
           </Button>
         </DialogActions>

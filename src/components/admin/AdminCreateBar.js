@@ -12,6 +12,7 @@ const styles = theme => ({
     flexGrow: 1,
   },
   button: {
+    marginTop: -20,
     marginBottom: 0,
     textAlign: 'center',
   },

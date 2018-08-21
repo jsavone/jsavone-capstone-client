@@ -77,7 +77,7 @@ render() {
 
   return (
     <div>
-      <Button onClick={this.handleClickOpenRecipe} className={classes.claim} color="primary">Create New Recipe</Button>
+      <Button onClick={this.handleClickOpenRecipe} className={classes.claim} variant="contained" color="primary">Create New Recipe</Button>
 
       <Dialog
         open={this.state.recipeOpen}

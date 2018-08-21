@@ -58,7 +58,7 @@ render() {
 
   return (
     <div>
-      <Button onClick={this.handleClickOpenCategory} className={classes.claim} color="primary">Create New Category</Button>
+      <Button onClick={this.handleClickOpenCategory} className={classes.claim} variant="contained" color="primary">Create New Category</Button>
 
       <Dialog
         open={this.state.categoryOpen}

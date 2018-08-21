@@ -123,6 +123,9 @@ const styles = theme => ({
   menu: {
     width: 1000,
   },
+  claim: {
+    marginTop: 15,
+  }
 });
 
 class AdminAddIngredients extends Component {
@@ -188,7 +191,7 @@ render() {
 
   return (
     <div>
-      <Button onClick={this.handleClickOpenIngredient} className={classes.claim} color="primary">Add Ingredient</Button>
+      <Button onClick={this.handleClickOpenIngredient} className={classes.claim} variant="contained" color="primary">Add Ingredient</Button>
 
       <Dialog
         open={this.state.ingredientOpen}
@@ -237,7 +240,7 @@ render() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={()=>this.handleSubmitIngredient(currIngredient._id)} color="primary">
+          <Button onClick={()=>this.handleSubmitIngredient(currIngredient._id)} variant="contained" color="primary">
             Add Ingredient
           </Button>
         </DialogActions>

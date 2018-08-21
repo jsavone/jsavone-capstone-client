@@ -92,7 +92,7 @@ render() {
 
   return (
     <div>
-      <Button onClick={this.handleClickOpenIngredient} className={classes.claim} color="primary">Create New Ingredient</Button>
+      <Button onClick={this.handleClickOpenIngredient} className={classes.claim} variant="contained" color="primary">Create New Ingredient</Button>
 
       <Dialog
         open={this.state.ingredientOpen}

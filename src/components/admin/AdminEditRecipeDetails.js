@@ -70,7 +70,7 @@ render() {
 
   return (
     <div>
-      <Button onClick={this.handleClickOpenRecipe} className={classes.claim} color="primary">Edit Recipe Details</Button>
+      <Button onClick={this.handleClickOpenRecipe} className={classes.claim} variant="contained" color="primary">Edit Recipe Details</Button>
 
       <Dialog
         open={this.state.recipeOpen}
@@ -153,7 +153,7 @@ render() {
         </DialogContent>
         <DialogActions>
 
-          <Button onClick={()=>this.handleSubmitRecipe()} color="primary">
+          <Button onClick={()=>this.handleSubmitRecipe()} variant="contained" color="primary">
             Edit Recipe
           </Button>
         </DialogActions>
