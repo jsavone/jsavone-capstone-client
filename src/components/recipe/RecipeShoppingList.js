@@ -5,10 +5,11 @@ import { removeMeal } from '../../redux/actions'
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
+import Box from '@material-ui/icons/CheckBoxOutlineBlank';
 
 const styles = theme => ({
-root: {
-
+icon: {
+  marginBottom: -6,
 }
 });
 
@@ -96,12 +97,11 @@ const RecipeShoppingList = (props) => {
     }
   })
 
-  let ingredientsList = ingrArray.map(ingr => <div key={ingr._id}><List>{ingr.amount} {ingr.unit} - {ingr.name}</List><Divider /></div>)
+  let ingredientsList = ingrArray.map(ingr => <div key={ingr._id}><List>{props.print ? <span><Box className={classes.icon}/>&nbsp;&nbsp;</span> : null}{ingr.amount} {ingr.unit} - {ingr.name}</List><Divider /></div>)
 
   return(
     <div className={classes.root}>
-    {ingredientsList}
-    <Divider />
+      {ingredientsList}
     </div>
   )
 }

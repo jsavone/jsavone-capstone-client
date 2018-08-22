@@ -13,6 +13,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom'
 
 const styles = {
   root: {
@@ -31,11 +33,18 @@ const styles = {
   },
   rightList: {
     marginLeft: 7,
-    width: 350,
+    width: 360,
   },
   rightHeading: {
     marginTop: 8,
     marginBottom:8,
+  },
+  print: {
+    marginTop: 3,
+    marginBottom: 3,
+  },
+  leftLink: {
+    textDecoration: 'none',
   }
 };
 
@@ -81,6 +90,10 @@ class NavBar extends React.Component {
     const leftSideList = (
       <div className={classes.leftList}>
         <h3>Shopping List</h3>
+        <Divider />
+        <Link className={classes.leftLink}to={`/${this.props.user.email}/plan/print/`} target="_blank">
+          <Button variant="contained" color="primary" className={classes.print}>PRINT PLAN</Button>
+        </Link>
         <Divider />
         <RecipeShoppingList user={this.props.user} />
       </div>

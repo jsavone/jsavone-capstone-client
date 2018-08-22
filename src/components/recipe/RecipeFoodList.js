@@ -52,6 +52,7 @@ const styles = theme => ({
   icon: {
     fontSize: 14,
     marginBottom: -3,
+    cursor: 'pointer',
   },
   link: {
     textDecoration: 'none',
@@ -86,9 +87,10 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
               { user.sundayBfast !== undefined ?
                 <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.sundayBfast._id}`}>{user.sundayBfast.title}</Link> -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.sundayBfast._id, 'sundayBfast')} />
+                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.sundayBfast._id}`}>{user.sundayBfast.title}</Link>{props.print ? null :<span>  -
+                  <Delete className={classes.icon} onClick={()=>handleRemove(user.sundayBfast._id, 'sundayBfast')} /></span>}
                 </div> : 'Empty'
+
               }
               </CustomTableCell>
             </TableRow>
@@ -99,8 +101,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
                 { user.sundayLunch !== undefined ?
                   <div>
-                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.sundayLunch._id}`}>{user.sundayLunch.title}</Link> -
-                    <Delete className={classes.icon} onClick={()=>handleRemove(user.sundayLunch._id, 'sundayLunch')} />
+                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.sundayLunch._id}`}>{user.sundayLunch.title}</Link>{props.print ? null :<span>  -
+                    <Delete className={classes.icon} onClick={()=>handleRemove(user.sundayLunch._id, 'sundayLunch')} /></span>}
                   </div> : 'Empty'
                 }
               </CustomTableCell>
@@ -112,8 +114,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
               { user.sundayDinner !== undefined ?
                 <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.sundayDinner._id}`}>{user.sundayDinner.title}</Link> -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.sundayDinner._id, 'sundayDinner')} />
+                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.sundayDinner._id}`}>{user.sundayDinner.title}</Link>{props.print ? null :<span>  -
+                  <Delete className={classes.icon} onClick={()=>handleRemove(user.sundayDinner._id, 'sundayDinner')} /></span>}
                 </div> : 'Empty'
               }
               </CustomTableCell>
@@ -135,8 +137,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
               { user.mondayBfast !== undefined ?
                 <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.mondayBfast._id}`}>{user.mondayBfast.title}</Link> -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.mondayBfast._id, 'mondayBfast')} />
+                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.mondayBfast._id}`}>{user.mondayBfast.title}</Link>{props.print ? null :<span>  -
+                  <Delete className={classes.icon} onClick={()=>handleRemove(user.mondayBfast._id, 'mondayBfast')} /></span>}
                 </div> : 'Empty'
               }
               </CustomTableCell>
@@ -148,8 +150,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
                 { user.mondayLunch !== undefined ?
                   <div>
-                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.mondayLunch._id}`}>{user.mondayLunch.title}</Link> -
-                    <Delete className={classes.icon} onClick={()=>handleRemove(user.mondayLunch._id, 'mondayLunch')} />
+                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.mondayLunch._id}`}>{user.mondayLunch.title}</Link>{props.print ? null :<span>  -
+                    <Delete className={classes.icon} onClick={()=>handleRemove(user.mondayLunch._id, 'mondayLunch')} /></span>}
                   </div> : 'Empty'
                 }
               </CustomTableCell>
@@ -161,8 +163,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
               { user.mondayDinner !== undefined ?
                 <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.mondayDinner._id}`}>{user.mondayDinner.title}</Link> -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.mondayDinner._id, 'mondayDinner')} />
+                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.mondayDinner._id}`}>{user.mondayDinner.title}</Link>{props.print ? null :<span>  -
+                  <Delete className={classes.icon} onClick={()=>handleRemove(user.mondayDinner._id, 'mondayDinner')} /></span>}
                 </div> : 'Empty'
               }
               </CustomTableCell>
@@ -184,8 +186,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
               { user.tuesdayBfast !== undefined ?
                 <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.tuesdayBfast._id}`}>{user.tuesdayBfast.title}</Link> -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.tuesdayBfast._id, 'tuesdayBfast')} />
+                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.tuesdayBfast._id}`}>{user.tuesdayBfast.title}</Link>{props.print ? null :<span>  -
+                  <Delete className={classes.icon} onClick={()=>handleRemove(user.tuesdayBfast._id, 'tuesdayBfast')} /></span>}
                 </div> : 'Empty'
               }
               </CustomTableCell>
@@ -197,8 +199,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
                 { user.tuesdayLunch !== undefined ?
                   <div>
-                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.tuesdayLunch._id}`}>{user.tuesdayLunch.title}</Link> -
-                    <Delete className={classes.icon} onClick={()=>handleRemove(user.tuesdayLunch._id, 'tuesdayLunch')} />
+                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.tuesdayLunch._id}`}>{user.tuesdayLunch.title}</Link>{props.print ? null :<span>  -
+                    <Delete className={classes.icon} onClick={()=>handleRemove(user.tuesdayLunch._id, 'tuesdayLunch')} /></span>}
                   </div> : 'Empty'
                 }
               </CustomTableCell>
@@ -210,8 +212,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
               { user.tuesdayDinner !== undefined ?
                 <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.tuesdayDinner._id}`}>{user.tuesdayDinner.title}</Link> -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.tuesdayDinner._id, 'tuesdayDinner')} />
+                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.tuesdayDinner._id}`}>{user.tuesdayDinner.title}</Link>{props.print ? null :<span>  -
+                  <Delete className={classes.icon} onClick={()=>handleRemove(user.tuesdayDinner._id, 'tuesdayDinner')} /></span>}
                 </div> : 'Empty'
               }
               </CustomTableCell>
@@ -233,8 +235,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
               { user.wednesdayBfast !== undefined ?
                 <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.wednesdayBfast._id}`}>{user.wednesdayBfast.title}</Link> -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.wednesdayBfast._id, 'wednesdayBfast')} />
+                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.wednesdayBfast._id}`}>{user.wednesdayBfast.title}</Link>{props.print ? null :<span>  -
+                  <Delete className={classes.icon} onClick={()=>handleRemove(user.wednesdayBfast._id, 'wednesdayBfast')} /></span>}
                 </div> : 'Empty'
               }
               </CustomTableCell>
@@ -246,8 +248,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
                 { user.wednesdayLunch !== undefined ?
                   <div>
-                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.wednesdayLunch._id}`}>{user.wednesdayLunch.title}</Link> -
-                    <Delete className={classes.icon} onClick={()=>handleRemove(user.wednesdayLunch._id, 'wednesdayLunch')} />
+                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.wednesdayLunch._id}`}>{user.wednesdayLunch.title}</Link>{props.print ? null :<span>  -
+                    <Delete className={classes.icon} onClick={()=>handleRemove(user.wednesdayLunch._id, 'wednesdayLunch')} /></span>}
                   </div> : 'Empty'
                 }
               </CustomTableCell>
@@ -259,8 +261,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
               { user.wednesdayDinner !== undefined ?
                 <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.wednesdayDinner._id}`}>{user.wednesdayDinner.title}</Link> -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.wednesdayDinner._id, 'wednesdayDinner')} />
+                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.wednesdayDinner._id}`}>{user.wednesdayDinner.title}</Link>{props.print ? null :<span>  -
+                  <Delete className={classes.icon} onClick={()=>handleRemove(user.wednesdayDinner._id, 'wednesdayDinner')} /></span>}
                 </div> : 'Empty'
               }
               </CustomTableCell>
@@ -282,8 +284,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
               { user.thursdayBfast !== undefined ?
                 <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.thursdayBfast._id}`}>{user.thursdayBfast.title}</Link> -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.thursdayBfast._id, 'thursdayBfast')} />
+                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.thursdayBfast._id}`}>{user.thursdayBfast.title}</Link>{props.print ? null :<span>  -
+                  <Delete className={classes.icon} onClick={()=>handleRemove(user.thursdayBfast._id, 'thursdayBfast')} /></span>}
                 </div> : 'Empty'
               }
               </CustomTableCell>
@@ -295,8 +297,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
                 { user.thursdayLunch !== undefined ?
                   <div>
-                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.thursdayLunch._id}`}>{user.thursdayLunch.title}</Link> -
-                    <Delete className={classes.icon} onClick={()=>handleRemove(user.thursdayLunch._id, 'thursdayLunch')} />
+                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.thursdayLunch._id}`}>{user.thursdayLunch.title}</Link>{props.print ? null :<span>  -
+                    <Delete className={classes.icon} onClick={()=>handleRemove(user.thursdayLunch._id, 'thursdayLunch')} /></span>}
                   </div> : 'Empty'
                 }
               </CustomTableCell>
@@ -308,8 +310,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
               { user.thursdayDinner !== undefined ?
                 <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.thursdayDinner._id}`}>{user.thursdayDinner.title}</Link> -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.thursdayDinner._id, 'thursdayDinner')} />
+                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.thursdayDinner._id}`}>{user.thursdayDinner.title}</Link>{props.print ? null :<span>  -
+                  <Delete className={classes.icon} onClick={()=>handleRemove(user.thursdayDinner._id, 'thursdayDinner')} /></span>}
                 </div> : 'Empty'
               }
               </CustomTableCell>
@@ -331,8 +333,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
               { user.fridayBfast !== undefined ?
                 <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.fridayBfast._id}`}>{user.fridayBfast.title}</Link> -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.fridayBfast._id, 'fridayBfast')} />
+                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.fridayBfast._id}`}>{user.fridayBfast.title}</Link>{props.print ? null :<span>  -
+                  <Delete className={classes.icon} onClick={()=>handleRemove(user.fridayBfast._id, 'fridayBfast')} /></span>}
                 </div> : 'Empty'
               }
               </CustomTableCell>
@@ -344,8 +346,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
                 { user.fridayLunch !== undefined ?
                   <div>
-                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.fridayLunch._id}`}>{user.fridayLunch.title}</Link> -
-                    <Delete className={classes.icon} onClick={()=>handleRemove(user.fridayLunch._id, 'fridayLunch')} />
+                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.fridayLunch._id}`}>{user.fridayLunch.title}</Link>{props.print ? null :<span>  -
+                    <Delete className={classes.icon} onClick={()=>handleRemove(user.fridayLunch._id, 'fridayLunch')} /></span>}
                   </div> : 'Empty'
                 }
               </CustomTableCell>
@@ -357,8 +359,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
               { user.fridayDinner !== undefined ?
                 <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.fridayDinner._id}`}>{user.fridayDinner.title}</Link> -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.fridayDinner._id, 'fridayDinner')} />
+                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.fridayDinner._id}`}>{user.fridayDinner.title}</Link>{props.print ? null :<span>  -
+                  <Delete className={classes.icon} onClick={()=>handleRemove(user.fridayDinner._id, 'fridayDinner')} /></span>}
                 </div> : 'Empty'
               }
               </CustomTableCell>
@@ -380,8 +382,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
               { user.saturdayBfast !== undefined ?
                 <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.saturdayBfast._id}`}>{user.saturdayBfast.title}</Link> -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.saturdayBfast._id, 'saturdayBfast')} />
+                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.saturdayBfast._id}`}>{user.saturdayBfast.title}</Link>{props.print ? null :<span>  -
+                  <Delete className={classes.icon} onClick={()=>handleRemove(user.saturdayBfast._id, 'saturdayBfast')} /></span>}
                 </div> : 'Empty'
               }
               </CustomTableCell>
@@ -393,8 +395,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
                 { user.saturdayLunch !== undefined ?
                   <div>
-                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.saturdayLunch._id}`}>{user.saturdayLunch.title}</Link> -
-                    <Delete className={classes.icon} onClick={()=>handleRemove(user.saturdayLunch._id, 'saturdayLunch')} />
+                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.saturdayLunch._id}`}>{user.saturdayLunch.title}</Link>{props.print ? null :<span>  -
+                    <Delete className={classes.icon} onClick={()=>handleRemove(user.saturdayLunch._id, 'saturdayLunch')} /></span>}
                   </div> : 'Empty'
                 }
               </CustomTableCell>
@@ -406,8 +408,8 @@ const RecipeFoodList = (props) => {
               <CustomTableCell numeric>
               { user.saturdayDinner !== undefined ?
                 <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.saturdayDinner._id}`}>{user.saturdayDinner.title}</Link> -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.saturdayDinner._id, 'saturdayDinner')} />
+                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.saturdayDinner._id}`}>{user.saturdayDinner.title}</Link>{props.print ? null :<span>  -
+                  <Delete className={classes.icon} onClick={()=>handleRemove(user.saturdayDinner._id, 'saturdayDinner')} /></span>}
                 </div> : 'Empty'
               }
               </CustomTableCell>

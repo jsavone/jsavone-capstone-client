@@ -44,6 +44,11 @@ const styles = theme => ({
   link: {
     textDecoration: 'none',
   },
+  printLink: {
+    textDecoration: 'none',
+    float: 'right',
+    marginRight: 3,
+  },
   instructions: {
     marginBottom: 10,
   }
@@ -105,10 +110,18 @@ class RecipeDetail extends Component {
       <div>
         <NavBar user={currUser}/>
         <div className={classes.body}>
-
-        <Link className={classes.link} to={`/${currUser.email}/recipes/`}>
-          <Button variant="contained" color="primary">Back to Recipe List</Button>
-        </Link>
+        <Grid container spacing={24} className={classes.instructions}>
+          <Grid item xs={6}>
+            <Link className={classes.link} to={`/${currUser.email}/recipes/`}>
+              <Button variant="contained" color="primary">Back to Recipe List</Button>
+            </Link>
+          </Grid>
+          <Grid item xs={6}>
+            <Link className={classes.printLink} to={`/${currUser.email}/recipes/print/${currRecipe._id}`} target="_blank">
+              <Button variant="contained" color="primary">PRINT RECIPE</Button>
+            </Link>
+          </Grid>
+        </Grid>
 
         <h1>{currRecipe.title ? currRecipe.title.toUpperCase(): null}</h1>
         <Grid container spacing={24}>
