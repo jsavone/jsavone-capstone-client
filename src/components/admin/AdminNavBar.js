@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { logout } from '../../redux/authActions'
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -27,11 +30,17 @@ const AdminNavBar = (props) => {
           <Typography variant="title" color="inherit" className={classes.flex}>
             Preptastic | ADMIN PANEL
           </Typography>
-          <Button color="inherit">Logout</Button>
+          <Button color="inherit" onClick={()=> props.logout()}>Logout</Button>
         </Toolbar>
       </AppBar>
     </div>
   );
 }
 
-export default withStyles(styles)(AdminNavBar);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  logout
+}, dispatch)
+
+const AdminNavBarConnect = connect(null, mapDispatchToProps)(AdminNavBar)
+
+export default withStyles(styles)(AdminNavBarConnect);

@@ -55,11 +55,9 @@ const { classes } = props;
     })
   }
 
-  console.log(currRecipe)
-
   return (
     <div className={classes.root}>
-      {window.print()}
+      {currRecipe.title ? window.print() : null}
       <div className={classes.content}>
         <Grid container spacing={24}>
           <Grid item xs={7}>

@@ -33,11 +33,10 @@ const RecipePrintPlan = (props) => {
 
 const { classes } = props;
 
-  const currUser = {...props.users.filter(user=> user.email === props.match.params.user_email)[0]}
+  const currUser = {...props.user}
 
   return (
     <div className={classes.root}>
-      {window.print()}
       <div className={classes.content}>
         <Grid container spacing={24}>
           <Grid item xs={5}>
@@ -52,13 +51,14 @@ const { classes } = props;
           </Grid>
         </Grid>
       </div>
+      {window.print()}
     </div>
   )
 }
 
 const mapStateToProps = state => {
   return {
-    users: state.users
+    user: state.user
   }
 }
 

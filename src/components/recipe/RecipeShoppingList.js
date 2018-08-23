@@ -108,7 +108,8 @@ const RecipeShoppingList = (props) => {
 
 const mapStateToProps = state => {
   return {
-    ingredients: state.ingredients
+    ingredients: state.ingredients,
+    user: state.user,
   }
 }
 

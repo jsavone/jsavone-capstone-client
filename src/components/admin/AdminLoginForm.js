@@ -2,7 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { userLogin } from '../../redux/actions'
+import { login } from '../../redux/authActions'
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -71,8 +71,12 @@ class AdminLoginForm extends React.Component {
           variant="contained"
           color="primary"
           className={classes.button}
-          onClick={()=>this.props.userLogin(this.state)}
-          href={"/admin/"+this.state.email}>
+          onClick={()=>this.props.login(this.state)
+            .then(
+            (res) => window.location = `/admin/panel`,
+            /*this.props.history.push(`/${this.state.email}/recipes`)*/
+            (err) => this.setState({ errors: err.response.data.errors, isLoading: false })
+          )}>
             Login
           </Button>
       </div>
@@ -82,7 +86,7 @@ class AdminLoginForm extends React.Component {
 
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  userLogin
+  login
 }, dispatch)
 
 const AdminLoginFormConnect = connect(null, mapDispatchToProps)(AdminLoginForm)

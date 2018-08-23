@@ -63,369 +63,90 @@ const styles = theme => ({
 
 const RecipeFoodList = (props) => {
 
+  const mealLabels = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday']
+
   const handleRemove = (recipe_id, meal) => {
+    console.log('recipe: ', recipe_id)
+    console.log('meal: ', meal)
     let removeMeal = {user_id: props.user._id, meal, recipe_id}
     props.removeMeal(removeMeal)
   }
-
   const { classes } = props;
 
   let user = props.user
 
+  const planList = mealLabels.map((day, index) => {
+    return (
+      <Paper className={classes.root} key={index} >
+        <div className={classes.head}>
+          <h5 className={classes.day}>{day.charAt(0).toUpperCase() + day.substr(1)}</h5>
+        </div>
+        <Table className={classes.table}>
+          <TableBody>
+            <TableRow className={classes.row} >
+              <CustomTableCell component="th" scope="row">
+                Breakfast
+              </CustomTableCell>
+              <CustomTableCell numeric>
+              { user[day+'Bfast'] !== undefined ?
+                <div>
+                  <Link className={classes.link} to={`/recipes/${user[day+'Bfast']._id}`}>{user[day+'Bfast'].title}</Link>{props.print ? null :<span>  -
+                  <Delete className={classes.icon} onClick={()=>handleRemove(user[day+'Bfast']._id, day+"Bfast")} /></span>}
+                </div> : 'Empty'
+
+              }
+              </CustomTableCell>
+            </TableRow>
+            <TableRow className={classes.row} >
+              <CustomTableCell component="th" scope="row">
+                Lunch
+              </CustomTableCell>
+              <CustomTableCell numeric>
+                { user[day+"Lunch"] !== undefined ?
+                  <div>
+                    <Link className={classes.link} to={`/recipes/${user[day+"Lunch"]._id}`}>{user[day+"Lunch"].title}</Link>{props.print ? null :<span>  -
+                    <Delete className={classes.icon} onClick={()=>handleRemove(user[day+"Lunch"]._id, day+"Lunch")} /></span>}
+                  </div> : 'Empty'
+                }
+              </CustomTableCell>
+            </TableRow>
+            <TableRow className={classes.row} >
+              <CustomTableCell component="th" scope="row">
+                Dinner
+              </CustomTableCell>
+              <CustomTableCell numeric>
+              { user[day+"Dinner"] !== undefined ?
+                <div>
+                  <Link className={classes.link} to={`/recipes/${user[day+"Dinner"]._id}`}>{user[day+"Dinner"].title}</Link>{props.print ? null :<span>  -
+                  <Delete className={classes.icon} onClick={()=>handleRemove(user[day+"Dinner"]._id, day+"Dinner")} /></span>}
+                </div> : 'Empty'
+              }
+              </CustomTableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </Paper>
+    )
+  })
+
+
   return (
     <div>
-      <Paper className={classes.root}>
-        <div className={classes.head}>
-          <h5 className={classes.day}>Sunday</h5>
-        </div>
-        <Table className={classes.table}>
-          <TableBody>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Breakfast
-              </CustomTableCell>
-              <CustomTableCell numeric>
-              { user.sundayBfast !== undefined ?
-                <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.sundayBfast._id}`}>{user.sundayBfast.title}</Link>{props.print ? null :<span>  -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.sundayBfast._id, 'sundayBfast')} /></span>}
-                </div> : 'Empty'
-
-              }
-              </CustomTableCell>
-            </TableRow>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Lunch
-              </CustomTableCell>
-              <CustomTableCell numeric>
-                { user.sundayLunch !== undefined ?
-                  <div>
-                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.sundayLunch._id}`}>{user.sundayLunch.title}</Link>{props.print ? null :<span>  -
-                    <Delete className={classes.icon} onClick={()=>handleRemove(user.sundayLunch._id, 'sundayLunch')} /></span>}
-                  </div> : 'Empty'
-                }
-              </CustomTableCell>
-            </TableRow>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Dinner
-              </CustomTableCell>
-              <CustomTableCell numeric>
-              { user.sundayDinner !== undefined ?
-                <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.sundayDinner._id}`}>{user.sundayDinner.title}</Link>{props.print ? null :<span>  -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.sundayDinner._id, 'sundayDinner')} /></span>}
-                </div> : 'Empty'
-              }
-              </CustomTableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </Paper>
-
-      <Paper className={classes.root}>
-        <div className={classes.head}>
-          <h5 className={classes.day}>Monday</h5>
-        </div>
-        <Table className={classes.table}>
-          <TableBody>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Breakfast
-              </CustomTableCell>
-              <CustomTableCell numeric>
-              { user.mondayBfast !== undefined ?
-                <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.mondayBfast._id}`}>{user.mondayBfast.title}</Link>{props.print ? null :<span>  -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.mondayBfast._id, 'mondayBfast')} /></span>}
-                </div> : 'Empty'
-              }
-              </CustomTableCell>
-            </TableRow>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Lunch
-              </CustomTableCell>
-              <CustomTableCell numeric>
-                { user.mondayLunch !== undefined ?
-                  <div>
-                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.mondayLunch._id}`}>{user.mondayLunch.title}</Link>{props.print ? null :<span>  -
-                    <Delete className={classes.icon} onClick={()=>handleRemove(user.mondayLunch._id, 'mondayLunch')} /></span>}
-                  </div> : 'Empty'
-                }
-              </CustomTableCell>
-            </TableRow>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Dinner
-              </CustomTableCell>
-              <CustomTableCell numeric>
-              { user.mondayDinner !== undefined ?
-                <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.mondayDinner._id}`}>{user.mondayDinner.title}</Link>{props.print ? null :<span>  -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.mondayDinner._id, 'mondayDinner')} /></span>}
-                </div> : 'Empty'
-              }
-              </CustomTableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </Paper>
-
-      <Paper className={classes.root}>
-        <div className={classes.head}>
-          <h5 className={classes.day}>Tuesday</h5>
-        </div>
-        <Table className={classes.table}>
-          <TableBody>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Breakfast
-              </CustomTableCell>
-              <CustomTableCell numeric>
-              { user.tuesdayBfast !== undefined ?
-                <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.tuesdayBfast._id}`}>{user.tuesdayBfast.title}</Link>{props.print ? null :<span>  -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.tuesdayBfast._id, 'tuesdayBfast')} /></span>}
-                </div> : 'Empty'
-              }
-              </CustomTableCell>
-            </TableRow>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Lunch
-              </CustomTableCell>
-              <CustomTableCell numeric>
-                { user.tuesdayLunch !== undefined ?
-                  <div>
-                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.tuesdayLunch._id}`}>{user.tuesdayLunch.title}</Link>{props.print ? null :<span>  -
-                    <Delete className={classes.icon} onClick={()=>handleRemove(user.tuesdayLunch._id, 'tuesdayLunch')} /></span>}
-                  </div> : 'Empty'
-                }
-              </CustomTableCell>
-            </TableRow>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Dinner
-              </CustomTableCell>
-              <CustomTableCell numeric>
-              { user.tuesdayDinner !== undefined ?
-                <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.tuesdayDinner._id}`}>{user.tuesdayDinner.title}</Link>{props.print ? null :<span>  -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.tuesdayDinner._id, 'tuesdayDinner')} /></span>}
-                </div> : 'Empty'
-              }
-              </CustomTableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </Paper>
-
-      <Paper className={classes.root}>
-        <div className={classes.head}>
-          <h5 className={classes.day}>Wednesday</h5>
-        </div>
-        <Table className={classes.table}>
-          <TableBody>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Breakfast
-              </CustomTableCell>
-              <CustomTableCell numeric>
-              { user.wednesdayBfast !== undefined ?
-                <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.wednesdayBfast._id}`}>{user.wednesdayBfast.title}</Link>{props.print ? null :<span>  -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.wednesdayBfast._id, 'wednesdayBfast')} /></span>}
-                </div> : 'Empty'
-              }
-              </CustomTableCell>
-            </TableRow>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Lunch
-              </CustomTableCell>
-              <CustomTableCell numeric>
-                { user.wednesdayLunch !== undefined ?
-                  <div>
-                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.wednesdayLunch._id}`}>{user.wednesdayLunch.title}</Link>{props.print ? null :<span>  -
-                    <Delete className={classes.icon} onClick={()=>handleRemove(user.wednesdayLunch._id, 'wednesdayLunch')} /></span>}
-                  </div> : 'Empty'
-                }
-              </CustomTableCell>
-            </TableRow>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Dinner
-              </CustomTableCell>
-              <CustomTableCell numeric>
-              { user.wednesdayDinner !== undefined ?
-                <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.wednesdayDinner._id}`}>{user.wednesdayDinner.title}</Link>{props.print ? null :<span>  -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.wednesdayDinner._id, 'wednesdayDinner')} /></span>}
-                </div> : 'Empty'
-              }
-              </CustomTableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-
-      </Paper>
-      <Paper className={classes.root}>
-        <div className={classes.head}>
-          <h5 className={classes.day}>Thursday</h5>
-        </div>
-        <Table className={classes.table}>
-          <TableBody>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Breakfast
-              </CustomTableCell>
-              <CustomTableCell numeric>
-              { user.thursdayBfast !== undefined ?
-                <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.thursdayBfast._id}`}>{user.thursdayBfast.title}</Link>{props.print ? null :<span>  -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.thursdayBfast._id, 'thursdayBfast')} /></span>}
-                </div> : 'Empty'
-              }
-              </CustomTableCell>
-            </TableRow>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Lunch
-              </CustomTableCell>
-              <CustomTableCell numeric>
-                { user.thursdayLunch !== undefined ?
-                  <div>
-                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.thursdayLunch._id}`}>{user.thursdayLunch.title}</Link>{props.print ? null :<span>  -
-                    <Delete className={classes.icon} onClick={()=>handleRemove(user.thursdayLunch._id, 'thursdayLunch')} /></span>}
-                  </div> : 'Empty'
-                }
-              </CustomTableCell>
-            </TableRow>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Dinner
-              </CustomTableCell>
-              <CustomTableCell numeric>
-              { user.thursdayDinner !== undefined ?
-                <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.thursdayDinner._id}`}>{user.thursdayDinner.title}</Link>{props.print ? null :<span>  -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.thursdayDinner._id, 'thursdayDinner')} /></span>}
-                </div> : 'Empty'
-              }
-              </CustomTableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </Paper>
-
-      <Paper className={classes.root}>
-        <div className={classes.head}>
-          <h5 className={classes.day}>Friday</h5>
-        </div>
-        <Table className={classes.table}>
-          <TableBody>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Breakfast
-              </CustomTableCell>
-              <CustomTableCell numeric>
-              { user.fridayBfast !== undefined ?
-                <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.fridayBfast._id}`}>{user.fridayBfast.title}</Link>{props.print ? null :<span>  -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.fridayBfast._id, 'fridayBfast')} /></span>}
-                </div> : 'Empty'
-              }
-              </CustomTableCell>
-            </TableRow>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Lunch
-              </CustomTableCell>
-              <CustomTableCell numeric>
-                { user.fridayLunch !== undefined ?
-                  <div>
-                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.fridayLunch._id}`}>{user.fridayLunch.title}</Link>{props.print ? null :<span>  -
-                    <Delete className={classes.icon} onClick={()=>handleRemove(user.fridayLunch._id, 'fridayLunch')} /></span>}
-                  </div> : 'Empty'
-                }
-              </CustomTableCell>
-            </TableRow>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Dinner
-              </CustomTableCell>
-              <CustomTableCell numeric>
-              { user.fridayDinner !== undefined ?
-                <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.fridayDinner._id}`}>{user.fridayDinner.title}</Link>{props.print ? null :<span>  -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.fridayDinner._id, 'fridayDinner')} /></span>}
-                </div> : 'Empty'
-              }
-              </CustomTableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </Paper>
-
-      <Paper className={classes.root}>
-        <div className={classes.head}>
-          <h5 className={classes.day}>Saturday</h5>
-        </div>
-        <Table className={classes.table}>
-          <TableBody>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Breakfast
-              </CustomTableCell>
-              <CustomTableCell numeric>
-              { user.saturdayBfast !== undefined ?
-                <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.saturdayBfast._id}`}>{user.saturdayBfast.title}</Link>{props.print ? null :<span>  -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.saturdayBfast._id, 'saturdayBfast')} /></span>}
-                </div> : 'Empty'
-              }
-              </CustomTableCell>
-            </TableRow>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Lunch
-              </CustomTableCell>
-              <CustomTableCell numeric>
-                { user.saturdayLunch !== undefined ?
-                  <div>
-                    <Link className={classes.link} to={`/${props.user.email}/recipes/${user.saturdayLunch._id}`}>{user.saturdayLunch.title}</Link>{props.print ? null :<span>  -
-                    <Delete className={classes.icon} onClick={()=>handleRemove(user.saturdayLunch._id, 'saturdayLunch')} /></span>}
-                  </div> : 'Empty'
-                }
-              </CustomTableCell>
-            </TableRow>
-            <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
-                Dinner
-              </CustomTableCell>
-              <CustomTableCell numeric>
-              { user.saturdayDinner !== undefined ?
-                <div>
-                  <Link className={classes.link} to={`/${props.user.email}/recipes/${user.saturdayDinner._id}`}>{user.saturdayDinner.title}</Link>{props.print ? null :<span>  -
-                  <Delete className={classes.icon} onClick={()=>handleRemove(user.saturdayDinner._id, 'saturdayDinner')} /></span>}
-                </div> : 'Empty'
-              }
-              </CustomTableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </Paper>
-
+    {planList}
     </div>
   );
 }
+
+  const mapStateToProps = state => {
+    return {
+      user: state.user,
+    }
+  }
 
   const mapDispatchToProps = dispatch => bindActionCreators({
     removeMeal
   }, dispatch)
 
-const RecipeFoodListConnect = connect(null, mapDispatchToProps)(RecipeFoodList)
+const RecipeFoodListConnect = connect(mapStateToProps, mapDispatchToProps)(RecipeFoodList)
 
 export default withStyles(styles)(RecipeFoodListConnect);

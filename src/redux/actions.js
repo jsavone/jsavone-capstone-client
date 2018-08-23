@@ -3,7 +3,8 @@ import axios from 'axios'
 export const FETCH_INGREDIENTS = 'FETCH_INGREDIENTS'
 export const FETCH_CATEGORIES = 'FETCH_CATEGORIES'
 export const FETCH_RECIPES = 'FETCH_RECIPES'
-export const FETCH_USERS = 'FETCH_USERS'
+export const FETCH_COMMENTS = 'FETCH_COMMENTS'
+export const FETCH_USER = 'FETCH_USER'
 export const CREATE_USER = 'CREATE_USER'
 export const USER_LOGIN = 'USER_LOGIN'
 export const CREATE_RECIPE = 'CREATE_RECIPE'
@@ -19,24 +20,43 @@ export const REMOVE_MEAL = 'REMOVE_MEAL'
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const REMOVE_COMMENT = 'REMOVE_COMMENT'
 
+let axiosInstance = axios.create({
+  baseURL: 'http//localhost:3000',
+  headers: { Authorization: `Bearer ${localStorage.getItem('jwtToken')}` },
+})
+
+export default axiosInstance;
+
 export const fetchRecipes = () => {
+  axiosInstance = axios.create({
+    baseURL: 'http//localhost:3000',
+    headers: { Authorization: `Bearer ${localStorage.getItem('jwtToken')}` },
+  })
   return( dispatch) => {
-    axios.get('http://localhost:8000/recipes')
+    axiosInstance({ method: 'get', url: 'http://localhost:8000/recipes'})
+    /*axios.get('http://localhost:8000/recipes')*/
     .then((response) => {
       dispatch({
         type: FETCH_RECIPES,
         payload: response.data
       })
-    })
+    }).then()
   }
 }
 
-export const fetchUsers = () => {
+export const fetchUser = (user) => {
+
+  axiosInstance = axios.create({
+    baseURL: 'http//localhost:3000',
+    headers: { Authorization: `Bearer ${localStorage.getItem('jwtToken')}` },
+  })
+
   return( dispatch) => {
-    axios.get('http://localhost:8000/users')
+    axiosInstance({ method: 'get', url: 'http://localhost:8000/users/'+user._id})
+    /*axios.get('http://localhost:8000/users/'+user._id)*/
     .then((response) => {
       dispatch({
-        type: FETCH_USERS,
+        type: FETCH_USER,
         payload: response.data
       })
     })
@@ -61,6 +81,18 @@ export const fetchIngredients = () => {
     .then((response) => {
       dispatch({
         type: FETCH_INGREDIENTS,
+        payload: response.data
+      })
+    })
+  }
+}
+
+export const fetchComments = () => {
+  return( dispatch) => {
+    axios.get('http://localhost:8000/comments')
+    .then((response) => {
+      dispatch({
+        type: FETCH_COMMENTS,
         payload: response.data
       })
     })
@@ -191,6 +223,7 @@ export const addMeal = (recipe) => {
   return( dispatch) => {
     axios.patch(`http://localhost:8000/users/add/${recipe.user_id}/${recipe.meal}/${recipe.recipe_id}`)
     .then((response) => {
+      response.data.meal = recipe.meal
       dispatch({
         type: ADD_MEAL,
         payload: response.data
@@ -203,6 +236,7 @@ export const removeMeal = (recipe) => {
   return( dispatch) => {
     axios.patch(`http://localhost:8000/users/remove/${recipe.user_id}/${recipe.meal}/${recipe.recipe_id}`)
     .then((response) => {
+      response.data.meal = recipe.meal
       dispatch({
         type: REMOVE_MEAL,
         payload: response.data

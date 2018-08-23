@@ -2,7 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { userLogin } from '../../redux/actions'
+import { login } from '../../redux/authActions'
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -37,7 +37,7 @@ class UserLogin extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.props)
+
     return (
       <div>
 
@@ -72,8 +72,13 @@ class UserLogin extends React.Component {
           variant="contained"
           color="primary"
           className={classes.button}
-          onClick={()=>this.props.userLogin(this.state)}
-          href={"/"+this.state.email+"/recipes/"}>
+          onClick={()=>this.props.login(this.state)
+            .then(
+            (res) => window.location = `/recipes`,
+            /*this.props.history.push(`/${this.state.email}/recipes`)*/
+            (err) => this.setState({ errors: err.response.data.errors, isLoading: false })
+          )}
+          /*href={"/"+this.state.email+"/recipes/"}*/>
             Login
           </Button>
       </div>
@@ -90,7 +95,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  userLogin
+  login
 }, dispatch)
 
 const UserLoginConnect = connect(mapStateToProps, mapDispatchToProps)(UserLogin)

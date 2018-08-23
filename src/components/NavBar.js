@@ -1,4 +1,7 @@
 import React from 'react';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { logout } from '../redux/authActions'
 import RecipeFoodList from './recipe/RecipeFoodList'
 import RecipeShoppingList from './recipe/RecipeShoppingList'
 import { withStyles } from '@material-ui/core/styles';
@@ -75,6 +78,7 @@ class NavBar extends React.Component {
   };
 
   render() {
+
     const { classes } = this.props;
     const { auth, anchorEl } = this.state;
     const open = Boolean(anchorEl);
@@ -91,11 +95,11 @@ class NavBar extends React.Component {
       <div className={classes.leftList}>
         <h3>Shopping List</h3>
         <Divider />
-        <Link className={classes.leftLink}to={`/${this.props.user.email}/plan/print/`} target="_blank">
+        <Link className={classes.leftLink}to={`/plan/print/`} target="_blank">
           <Button variant="contained" color="primary" className={classes.print}>PRINT PLAN</Button>
         </Link>
         <Divider />
-        <RecipeShoppingList user={this.props.user} />
+        <RecipeShoppingList />
       </div>
     );
 
@@ -131,8 +135,7 @@ class NavBar extends React.Component {
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                  <MenuItem onClick={()=>this.props.logout()}>Logout</MenuItem>
                 </Menu>
                 <IconButton onClick={this.toggleDrawer('left', true)} className={classes.menuButton} color="inherit" aria-label="Menu">
                   <ShoppingCart />
@@ -169,4 +172,11 @@ class NavBar extends React.Component {
   }
 }
 
-export default withStyles(styles)(NavBar);
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  logout
+}, dispatch)
+
+const NavBarConnect = connect(null, mapDispatchToProps)(NavBar)
+
+export default withStyles(styles)(NavBarConnect);

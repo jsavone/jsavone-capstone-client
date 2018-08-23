@@ -62,7 +62,7 @@ if (thisRecipe.categories !== undefined) {
 
 if (thisRecipe.comments) {
   currComments = [...thisRecipe.comments].map(com=> {
-    let user = {...this.props.users.filter(user=> user._id === com.user)[0]}
+    let user = this.props.user
     return <div key={com._id}><p>{com.comment}</p><p>by {user.firstName} {user.lastName} - <span className={classes.remove} onClick={()=>this.props.removeComment({recipe: thisRecipe._id, comment: com._id})}><Delete className={classes.delete}/></span></p><Divider /></div>
   })
 }
@@ -70,7 +70,7 @@ if (thisRecipe.comments) {
       <div className={classes.root}>
         <AdminNavBar />
         <AdminCreateBar />
-        <Link to={`/admin/${this.props.match.params.admin_email}`}>
+        <Link to={`/admin/panel`}>
           <Button className={classes.link} variant="contained" color="primary">Back to Recipe List</Button>
         </Link>
         <div>
@@ -115,7 +115,7 @@ const mapStateToProps = state => {
     recipes: state.recipes,
     categories: state.categories,
     ingredients: state.ingredients,
-    users: state.users,
+    user: state.user,
   }
 }
 

@@ -2,8 +2,9 @@ import { createStore, applyMiddleware, combineReducers } from 'redux'
 import recipes from './recipesReducer'
 import categories from './categoriesReducer'
 import ingredients from './ingredientsReducer'
+import comments from './commentsReducer'
+import auth from './authReducer';
 import user from './userReducer'
-import users from './usersReducer'
 import thunk from 'redux-thunk'
 
 
@@ -11,8 +12,9 @@ const rootReducer = combineReducers({
   recipes,
   categories,
   ingredients,
-  users,
+  comments,
   user,
+  auth,
 })
 
 export default () => createStore(rootReducer, applyMiddleware(thunk))

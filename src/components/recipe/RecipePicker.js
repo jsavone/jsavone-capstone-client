@@ -31,19 +31,15 @@ class RecipePicker extends Component {
     search: ''
   }
 
-
   render () {
 
     const { classes } = this.props;
-        let currUser = {...this.props.users.filter(user=> user.email === this.props.match.params.user_email)[0]}
-
     let categoriesList = [{value: '', label: 'None'}]
-
     this.props.categories.map(category => categoriesList.push({value: category.category, label:category.category}))
 
       return (
         <div>
-          <NavBar user={currUser}/>
+          <NavBar />
             <form className={classes.container} noValidate autoComplete="off">
               <TextField
                 id="search"
@@ -97,10 +93,11 @@ const mapStateToProps = state => {
   return {
     recipes: state.recipes,
     categories: state.categories,
-    users: state.users,
     user: state.user,
+    auth: state.auth
   }
 }
+
 
 let RecipePickerConnect = connect(mapStateToProps)(RecipePicker)
 

@@ -82,7 +82,8 @@ class RecipeDetail extends Component {
      });
    };
 
-  handleSubmitMeal = (recipe, user) => {
+  handleSubmitMeal = (recipe, user, e) => {
+
     let newMeal = {
                     user_id: user,
                     meal: this.state.day+this.state.meal,
@@ -96,8 +97,7 @@ class RecipeDetail extends Component {
 
     const { classes } = this.props;
 
-    const currUser = {...this.props.users.filter(user=> user.email === this.props.match.params.user_email)[0]}
-
+    const currUser = {...this.props.user}
     const currRecipe = {...this.props.recipes.filter(recipe=> recipe._id === this.props.match.params.id)[0]}
 
     let ingredientsList = []
@@ -112,12 +112,12 @@ class RecipeDetail extends Component {
         <div className={classes.body}>
         <Grid container spacing={24} className={classes.instructions}>
           <Grid item xs={6}>
-            <Link className={classes.link} to={`/${currUser.email}/recipes/`}>
+            <Link className={classes.link} to={`/recipes/`}>
               <Button variant="contained" color="primary">Back to Recipe List</Button>
             </Link>
           </Grid>
           <Grid item xs={6}>
-            <Link className={classes.printLink} to={`/${currUser.email}/recipes/print/${currRecipe._id}`} target="_blank">
+            <Link className={classes.printLink} to={`/recipes/print/${currRecipe._id}`} target="_blank">
               <Button variant="contained" color="primary">PRINT RECIPE</Button>
             </Link>
           </Grid>
@@ -174,7 +174,7 @@ class RecipeDetail extends Component {
                   </MenuItem>
                 ))}
               </TextField>
-              <Button onClick={()=>this.handleSubmitMeal(currRecipe._id, currUser._id)}           variant="contained" color="primary" className={classes.button}>
+              <Button onClick={(e)=> this.handleSubmitMeal(currRecipe._id, currUser._id)}           variant="contained" color="primary" className={classes.button}>
                 Add Meal to Plan
               </Button>
           </form>
@@ -204,7 +204,6 @@ class RecipeDetail extends Component {
 const mapStateToProps = state => {
   return {
     recipes: state.recipes,
-    users: state.users,
     user: state.user,
   }
 }

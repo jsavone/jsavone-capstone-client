@@ -8,11 +8,17 @@ class AdminPanel extends Component {
 
 render() {
 
+  if (this.props.user.email) {
+    if (!this.props.user.admin) {
+      this.props.history.push('/login')
+    }
+  }
+
   return (
     <div>
       <AdminNavBar />
       <AdminCreateBar />
-      <AdminRecipeList admin={this.props.match.params.admin_email}/>
+      <AdminRecipeList admin={this.props.user}/>
     </div>
   )
 }
@@ -20,7 +26,7 @@ render() {
 
 const mapStateToProps = state => {
   return {
-    recipes: state.recipes
+    user: state.user
   }
 }
 

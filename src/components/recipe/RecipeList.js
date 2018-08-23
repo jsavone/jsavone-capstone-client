@@ -48,10 +48,10 @@ const RecipeList = (props) => {
           <GridListTile key={tile.img}>
             <img src={tile.img} alt={tile.title} />
             <GridListTileBar
-              title={<a href={tile._id} className={classes.link}>{tile.title}</a>}
+              title={<a href={'/recipes/'+tile._id} className={classes.link}>{tile.title}</a>}
               subtitle={<span><a href={tile._id} className={classes.link}>Cook time: {tile.cookTime}</a></span>}
               actionIcon={
-                <IconButton className={classes.icon} href={tile._id}>
+                <IconButton className={classes.icon} href={'/recipes/'+tile._id}>
                   <InfoIcon />
                 </IconButton>
               }

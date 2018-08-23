@@ -78,13 +78,14 @@ class RecipeComments extends Component {
     let totalComments = 0
     let commentList = []
 
-    if (this.props.recipe.comments && this.props.recipe.comments.length > 0) {
-      totalComments = this.props.recipe.comments.length
-      commentList = this.props.recipe.comments.map(comment => {
+  let currComments = [...this.props.comments.filter(comment=> comment.recipe._id === this.props.recipe._id)]
+
+    if (this.props.comments && currComments.length > 0) {
+      totalComments = currComments.length
+      commentList = currComments.map(comment => {
         const dateToFormat = new Date(comment.created)
-        let thisUser = {...this.props.users.filter(user=> user._id === comment.user)[0]}
         return <div key={comment._id}>
-                <p><strong>{thisUser.firstName+" "+thisUser.lastName}</strong> said:</p>
+                <p><strong>{comment.user.firstName+" "+comment.user.lastName}</strong> said:</p>
                 <p>{comment.comment}</p>
                 <p className={classes.date}><Moment fromNow ago>{dateToFormat}</Moment> ago</p>
                 <Divider className={classes.divider}/>
@@ -136,7 +137,7 @@ class RecipeComments extends Component {
 
 const mapStateToProps = state => {
   return {
-    users: state.users,
+    comments: state.comments,
   }
 }
 
