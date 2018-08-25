@@ -57,7 +57,6 @@ const { classes } = props;
 
   return (
     <div className={classes.root}>
-      {currRecipe.title ? window.print() : null}
       <div className={classes.content}>
         <Grid container spacing={24}>
           <Grid item xs={7}>
@@ -77,6 +76,7 @@ const { classes } = props;
           <h3 className={classes.header}>Directions</h3>
           <p>{currRecipe.directions}</p>
       </div>
+      {currRecipe.title ? window.print() : null}
     </div>
   )
 }

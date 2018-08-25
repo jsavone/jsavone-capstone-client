@@ -11,21 +11,17 @@ import { bindActionCreators } from 'redux'
 const styles = theme => ({
   container: {
     display: 'in-line',
+    marginLeft: 0,
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
     width: '100%',
-  },
-  menu: {
-    width: 1000,
   },
   button: {
     marginTop: 15,
   },
   heading: {
-    marginTop: 15,
-  },
+    fontSize: 24,
+  }
 });
 
 
@@ -86,18 +82,11 @@ class UserLogin extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    recipes: state.recipes,
-    users: state.users,
-    user: state.user,
-  }
-}
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   login
 }, dispatch)
 
-const UserLoginConnect = connect(mapStateToProps, mapDispatchToProps)(UserLogin)
+const UserLoginConnect = connect(null, mapDispatchToProps)(UserLogin)
 
 export default withStyles(styles)(UserLoginConnect);

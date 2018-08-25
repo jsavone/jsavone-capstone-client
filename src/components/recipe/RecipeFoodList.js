@@ -63,17 +63,16 @@ const styles = theme => ({
 
 const RecipeFoodList = (props) => {
 
-  const mealLabels = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday']
-
-  const handleRemove = (recipe_id, meal) => {
-    console.log('recipe: ', recipe_id)
-    console.log('meal: ', meal)
-    let removeMeal = {user_id: props.user._id, meal, recipe_id}
-    props.removeMeal(removeMeal)
-  }
   const { classes } = props;
 
   let user = props.user
+
+  const mealLabels = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday']
+
+  const handleRemove = (recipe_id, meal) => {
+    let removeMeal = {user_id: user._id, meal, recipe_id}
+    props.removeMeal(removeMeal)
+  }
 
   const planList = mealLabels.map((day, index) => {
     return (
@@ -132,7 +131,7 @@ const RecipeFoodList = (props) => {
 
   return (
     <div>
-    {planList}
+      {planList}
     </div>
   );
 }

@@ -1,12 +1,12 @@
 import React from 'react'
 import NavBar from './NavBar'
-import UserSignup from './user/UserSignup'
+import Forms from './user/Forms'
 
 const Main = (props) => {
   return (
     <div>
       <NavBar />
-      <UserSignup />
+      <Forms path={props.match.path}/>
     </div>
   )
 }

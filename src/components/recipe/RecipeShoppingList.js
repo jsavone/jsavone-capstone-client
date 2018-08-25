@@ -20,14 +20,14 @@ const RecipeShoppingList = (props) => {
   let currUser = props.user
 
   let allIngredients = []
-  if (currUser.thursdayBfast) {
-    allIngredients = [...allIngredients, ...currUser.thursdayBfast.ingredients]
+  if (currUser.sundayBfast) {
+    allIngredients = [...allIngredients, ...currUser.sundayBfast.ingredients]
   }
-  if (currUser.thursdayLunch) {
-    allIngredients = [...allIngredients, ...currUser.thursdayLunch.ingredients]
+  if (currUser.sundayLunch) {
+    allIngredients = [...allIngredients, ...currUser.sundayLunch.ingredients]
   }
-  if (currUser.thursdayDinner) {
-    allIngredients = [...allIngredients, ...currUser.thursdayDinner.ingredients]
+  if (currUser.sundayDinner) {
+    allIngredients = [...allIngredients, ...currUser.sundayDinner.ingredients]
   }
   if (currUser.mondayBfast) {
     allIngredients = [...allIngredients, ...currUser.mondayBfast.ingredients]
@@ -101,7 +101,8 @@ const RecipeShoppingList = (props) => {
 
   return(
     <div className={classes.root}>
-      {ingredientsList}
+      {ingredientsList.length > 0 ? ingredientsList : <h2>Add meals to your calendar to build a shopping list!</h2>}
+      {ingredientsList.length > 1 && props.print ? window.print() : null}
     </div>
   )
 }

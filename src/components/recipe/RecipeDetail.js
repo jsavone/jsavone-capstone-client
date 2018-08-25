@@ -82,8 +82,7 @@ class RecipeDetail extends Component {
      });
    };
 
-  handleSubmitMeal = (recipe, user, e) => {
-
+  handleSubmitMeal = (recipe, user) => {
     let newMeal = {
                     user_id: user,
                     meal: this.state.day+this.state.meal,
@@ -174,7 +173,7 @@ class RecipeDetail extends Component {
                   </MenuItem>
                 ))}
               </TextField>
-              <Button onClick={(e)=> this.handleSubmitMeal(currRecipe._id, currUser._id)}           variant="contained" color="primary" className={classes.button}>
+              <Button onClick={()=> this.handleSubmitMeal(currRecipe._id, currUser._id)}           variant="contained" color="primary" className={classes.button}>
                 Add Meal to Plan
               </Button>
           </form>

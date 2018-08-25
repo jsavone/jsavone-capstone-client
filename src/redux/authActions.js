@@ -22,7 +22,8 @@ export const logout = () => {
 
 export const login = (user) => {
   return dispatch => {
-    return axios.post('http://localhost:8000/users/login', user).then(res => {
+    return axios.post('http://localhost:8000/users/login', user).then((res, err) => {
+      console.log(err)
       const token = res.data.token;
       localStorage.setItem('jwtToken', token);
       setAuthorizationToken(token);

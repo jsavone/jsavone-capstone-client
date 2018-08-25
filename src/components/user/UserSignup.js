@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { createUser } from '../../redux/actions'
 import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   container: {
@@ -16,9 +17,9 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: 500,
   },
-  menu: {
-    width: 1000,
-  },
+  heading: {
+    fontSize: 24,
+  }
 });
 
 class UserSignup extends React.Component {
@@ -35,6 +36,11 @@ class UserSignup extends React.Component {
 
     return (
       <div>
+
+        <Typography variant="display1" className={classes.heading} gutterBottom>
+         CREATE AN ACCOUNT
+        </Typography>
+
         <form className={classes.container} noValidate autoComplete="off">
           <TextField
             required

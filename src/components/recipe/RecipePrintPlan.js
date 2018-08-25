@@ -34,7 +34,7 @@ const RecipePrintPlan = (props) => {
 const { classes } = props;
 
   const currUser = {...props.user}
-
+  console.log(React.Children)
   return (
     <div className={classes.root}>
       <div className={classes.content}>
@@ -51,7 +51,6 @@ const { classes } = props;
           </Grid>
         </Grid>
       </div>
-      {window.print()}
     </div>
   )
 }

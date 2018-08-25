@@ -53,7 +53,6 @@ export const fetchUser = (user) => {
 
   return( dispatch) => {
     axiosInstance({ method: 'get', url: 'http://localhost:8000/users/'+user._id})
-    /*axios.get('http://localhost:8000/users/'+user._id)*/
     .then((response) => {
       dispatch({
         type: FETCH_USER,
@@ -65,7 +64,7 @@ export const fetchUser = (user) => {
 
 export const fetchCategories = () => {
   return( dispatch) => {
-    axios.get('http://localhost:8000/categories')
+    axiosInstance({ method: 'get', url:'http://localhost:8000/categories'})
     .then((response) => {
       dispatch({
         type: FETCH_CATEGORIES,
@@ -77,7 +76,7 @@ export const fetchCategories = () => {
 
 export const fetchIngredients = () => {
   return( dispatch) => {
-    axios.get('http://localhost:8000/ingredients')
+    axiosInstance({ method: 'get', url: 'http://localhost:8000/ingredients'})
     .then((response) => {
       dispatch({
         type: FETCH_INGREDIENTS,
@@ -89,7 +88,7 @@ export const fetchIngredients = () => {
 
 export const fetchComments = () => {
   return( dispatch) => {
-    axios.get('http://localhost:8000/comments')
+    axiosInstance({ method: 'get', url:'http://localhost:8000/comments'})
     .then((response) => {
       dispatch({
         type: FETCH_COMMENTS,
@@ -111,17 +110,6 @@ export const createUser = (user) => {
   }
 }
 
-export const userLogin = (user) => {
-  return( dispatch) => {
-    axios.post('http://localhost:8000/users/login', user)
-    .then((response) => {
-      dispatch({
-        type: USER_LOGIN,
-        payload: response.data
-      })
-    })
-  }
-}
 
 export const createRecipe = (recipe) => {
   return( dispatch) => {
@@ -223,7 +211,6 @@ export const addMeal = (recipe) => {
   return( dispatch) => {
     axios.patch(`http://localhost:8000/users/add/${recipe.user_id}/${recipe.meal}/${recipe.recipe_id}`)
     .then((response) => {
-      response.data.meal = recipe.meal
       dispatch({
         type: ADD_MEAL,
         payload: response.data

@@ -7,7 +7,6 @@ export default function(ComposedComponent) {
 
     componentWillMount() {
       if (!this.props.isAuthenticated) {
-        console.log('Not Authenticated!: ',this.context)
         this.props.history.push('/login');
       }
     }
