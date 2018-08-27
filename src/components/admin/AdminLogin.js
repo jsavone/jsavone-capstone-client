@@ -1,11 +1,11 @@
 import React from 'react'
-import NavBar from '../NavBar'
+import AdminNavBar from './AdminNavBar'
 import AdminLoginForm from './AdminLoginForm'
 
 const AdminLogin = (props) => {
   return(
     <div>
-      <NavBar />
+      <AdminNavBar />
       <AdminLoginForm />
     </div>
   )

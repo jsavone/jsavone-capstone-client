@@ -30,6 +30,7 @@ TabContainer.propTypes = {
 const styles = theme => ({
   root: {
     margin: '0 auto',
+    marginBottom: 30,
     width: '50%',
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
@@ -53,7 +54,7 @@ const styles = theme => ({
   },
   error: {
     minHeight: 30,
-    backgroundColor: 'red',
+    backgroundColor: '#E27776',
     width: '100%',
     color: 'white',
     textAlign: 'center',
@@ -61,7 +62,7 @@ const styles = theme => ({
     paddingTop:10,
     marginBottom: 10,
     fontWeight: 500,
-    opacity: .75,
+
   },
   success: {
     minHeight: 30,
@@ -92,7 +93,7 @@ class Forms extends React.Component {
   };
 
   handleChange = (event, value) => {
-    this.setState({ value });
+    this.setState({ value, error: '', success: '' });
   };
 
   handleLogin = (e) => {
@@ -121,7 +122,7 @@ class Forms extends React.Component {
     const { classes } = this.props;
     const { checked } = this.state;
     const { value } = this.state;
-    console.log("users: ",this.props.user.success)
+
     let message = ''
     if (this.props.user.success) {
       message = <div className={classes.success}>{this.props.user.success}</div>
@@ -131,7 +132,7 @@ class Forms extends React.Component {
     }
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" >
           <Tabs value={value} onChange={this.handleChange}>
             <Tab className={classes.tab} icon={<PersonAddIcon />} label="SIGNUP" />
             <Tab icon={<PersonIcon />} label="ALREADY A USER?" />

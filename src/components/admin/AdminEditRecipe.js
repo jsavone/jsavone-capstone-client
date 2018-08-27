@@ -17,7 +17,9 @@ import Delete from '@material-ui/icons/DeleteRounded';
 
 const styles = theme => ({
   root: {
-    whiteSpace: 'pre-line'
+    whiteSpace: 'pre-line',
+    margin: '0 auto',
+    width: '98%',
   },
   img: {
     width: '90%',
@@ -32,10 +34,14 @@ const styles = theme => ({
     cursor: 'pointer'
   },
   link: {
+    textDecoration: 'none',
+  },
+  backButton: {
     marginTop: 10,
   },
   delete: {
     marginBottom: -5,
+    color: "#D57C79",
   },
 
 });
@@ -67,11 +73,12 @@ if (thisRecipe.comments) {
   })
 }
     return(
-      <div className={classes.root}>
+      <div>
         <AdminNavBar />
+        <div className={classes.root}>
         <AdminCreateBar />
-        <Link to={`/admin/panel`}>
-          <Button className={classes.link} variant="contained" color="primary">Back to Recipe List</Button>
+        <Link to={`/admin/panel`} className={classes.link}>
+          <Button className={classes.backButton} variant="contained" color="primary">Back to Recipe List</Button>
         </Link>
         <div>
           <Grid container spacing={24}>
@@ -105,6 +112,7 @@ if (thisRecipe.comments) {
 
         <h3>CURRENT COMMENTS</h3>
         {currComments}
+        </div>
       </div>
     )
   }

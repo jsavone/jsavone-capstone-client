@@ -23,6 +23,7 @@ const styles = theme => ({
     width: "75%",
   },
   container: {
+    textAlign: 'center',
     marginBottom: 10,
   }
 });

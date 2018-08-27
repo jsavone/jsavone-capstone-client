@@ -40,9 +40,9 @@ const RecipeList = (props) => {
 
   return (
     <div className={classes.root}>
-      <GridList cellHeight={180} className={classes.gridList}>
+      <GridList cellHeight={300} spacing={7} className={classes.gridList}>
         <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-          <ListSubheader component="div">Top Recipes</ListSubheader>
+          <ListSubheader component="div">Choose a Recipe</ListSubheader>
         </GridListTile>
         {catFilter.filter(recipe=>recipe.title.toLowerCase().includes(props.search.toLowerCase())).map(tile => (
           <GridListTile key={tile.img}>

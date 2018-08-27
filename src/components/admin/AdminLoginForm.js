@@ -2,6 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
 import { login } from '../../redux/authActions'
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux'
@@ -11,20 +12,19 @@ import { bindActionCreators } from 'redux'
 const styles = theme => ({
   container: {
     display: 'in-line',
+    width: '60%',
+    margin: '0 auto',
+    marginTop: 30,
+    padding: 20,
   },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+  form: {
     width: '100%',
   },
-  menu: {
-    width: 1000,
+  textField: {
+    width: '100%',
   },
   button: {
-    marginTop: 15,
-  },
-  heading: {
-    marginTop: 15,
+    marginTop: 17,
   },
 });
 
@@ -38,35 +38,32 @@ class AdminLoginForm extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <div>
-
+      <Paper className={classes.container}>
+        <form className={classes.form} noValidate autoComplete="off">
           <Typography variant="display1" className={classes.heading} gutterBottom>
-           Admin Login
+           ADMIN LOGIN
           </Typography>
+          <TextField
+            required
+            id="email"
+            label="email"
+            type="email"
+            className={classes.textField}
+            value={this.state.email}
+            onChange={(e)=>this.setState({email: e.target.value})}
+            margin="normal"
+          />
 
-          <form className={classes.container} noValidate autoComplete="off">
-            <TextField
-              required
-              id="email"
-              label="email"
-              type="email"
-              className={classes.textField}
-              value={this.state.email}
-              onChange={(e)=>this.setState({email: e.target.value})}
-              margin="normal"
-            />
-
-            <TextField
-              required
-              id="password-input"
-              label="Password"
-              className={classes.textField}
-              type="password"
-              value={this.state.password}
-              onChange={(e)=>this.setState({password: e.target.value})}
-              margin="normal"
-            />
-          </form>
+          <TextField
+            required
+            id="password-input"
+            label="Password"
+            className={classes.textField}
+            type="password"
+            value={this.state.password}
+            onChange={(e)=>this.setState({password: e.target.value})}
+            margin="normal"
+          />
           <Button
           variant="contained"
           color="primary"
@@ -79,7 +76,8 @@ class AdminLoginForm extends React.Component {
           )}>
             Login
           </Button>
-      </div>
+        </form>
+      </Paper>
     );
   }
 }

@@ -27,6 +27,7 @@ const styles = theme => ({
   },
   claim: {
     marginTop: 20,
+    color: '#67B55F'
   },
 });
 
@@ -92,7 +93,7 @@ render() {
 
   return (
     <div>
-      <Button onClick={this.handleClickOpenIngredient} className={classes.claim} variant="contained" color="primary">Create New Ingredient</Button>
+      <Button onClick={this.handleClickOpenIngredient} className={classes.claim} variant="outlined" color="primary">Create New Ingredient</Button>
 
       <Dialog
         open={this.state.ingredientOpen}
@@ -141,7 +142,7 @@ render() {
         </DialogContent>
         <DialogActions>
 
-          <Button onClick={()=>this.handleSubmitIngredient()} color="primary">
+          <Button onClick={()=>this.handleSubmitIngredient()} color="primary" variant="contained">
             Add Ingredient
           </Button>
         </DialogActions>

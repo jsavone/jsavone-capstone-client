@@ -14,11 +14,10 @@ import { bindActionCreators } from 'redux'
 import { addMeal } from '../../redux/actions'
 import { Link } from 'react-router-dom'
 
-
 const styles = theme => ({
   body: {
     paddingTop: 15,
-    marginLeft: 5,
+    marginLeft: 7,
   },
   container: {
     marginRight: 7,
@@ -31,9 +30,11 @@ const styles = theme => ({
   },
   button: {
     marginTop: 15,
+    color: 'black',
   },
   heading: {
     marginTop: 0,
+    color: '#E27776',
   },
   ingredients: {
     fontSize: '1.15em',
@@ -47,10 +48,13 @@ const styles = theme => ({
   printLink: {
     textDecoration: 'none',
     float: 'right',
-    marginRight: 3,
+    marginRight: 8,
   },
   instructions: {
     marginBottom: 10,
+  },
+  title: {
+    color: '#424242'
   }
 });
 
@@ -104,7 +108,6 @@ class RecipeDetail extends Component {
     if(currRecipe.ingredients) {
       ingredientsList = currRecipe.ingredients.map(ingr => <div key={ingr._id}><List className={classes.ingredients}>{ingr.amount} {ingr.ingredientId.unit} - {ingr.ingredientId.name}</List><Divider /></div>)
     }
-
     return(
       <div>
         <NavBar user={currUser}/>
@@ -112,17 +115,17 @@ class RecipeDetail extends Component {
         <Grid container spacing={24} className={classes.instructions}>
           <Grid item xs={6}>
             <Link className={classes.link} to={`/recipes/`}>
-              <Button variant="contained" color="primary">Back to Recipe List</Button>
+              <Button className={classes.button} variant="contained" color="primary">Back to Recipe List</Button>
             </Link>
           </Grid>
           <Grid item xs={6}>
             <Link className={classes.printLink} to={`/recipes/print/${currRecipe._id}`} target="_blank">
-              <Button variant="contained" color="primary">PRINT RECIPE</Button>
+              <Button className={classes.button} variant="contained" color="primary">PRINT RECIPE</Button>
             </Link>
           </Grid>
         </Grid>
 
-        <h1>{currRecipe.title ? currRecipe.title.toUpperCase(): null}</h1>
+        <h1 className={classes.title}>{currRecipe.title ? currRecipe.title.toUpperCase(): null}</h1>
         <Grid container spacing={24}>
           <Grid item xs={12} sm={8}>
           {currRecipe.video ? <iframe width="100%" height="315" title={currRecipe.title} src={`https://www.youtube.com/embed/${currRecipe.video}?rel=0&amp;showinfo=0`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
@@ -184,11 +187,11 @@ class RecipeDetail extends Component {
 
         <Grid container spacing={24} className={classes.instructions}>
           <Grid item xs={12} sm={4}>
-            <h2>INGREDIENTS</h2>
+            <h2 className={classes.title}>INGREDIENTS</h2>
             {ingredientsList}
           </Grid>
           <Grid item xs={12} sm={8} className={classes.directions}>
-            <h2>DIRECTIONS</h2>
+            <h2 className={classes.title}>DIRECTIONS</h2>
             {currRecipe.directions}
           </Grid>
         </Grid>

@@ -26,6 +26,7 @@ const styles = theme => ({
   },
   claim: {
     marginTop: 20,
+    color: '#67B55F'
   },
 });
 
@@ -58,7 +59,7 @@ render() {
 
   return (
     <div>
-      <Button onClick={this.handleClickOpenCategory} className={classes.claim} variant="contained" color="primary">Create New Category</Button>
+      <Button onClick={this.handleClickOpenCategory} className={classes.claim} variant="outlined" color="primary">Create New Category</Button>
 
       <Dialog
         open={this.state.categoryOpen}
@@ -84,7 +85,7 @@ render() {
         </DialogContent>
         <DialogActions>
 
-          <Button onClick={()=>this.handleSubmitCategory()} color="primary">
+          <Button onClick={()=>this.handleSubmitCategory()} color="primary" variant="contained">
             Add Category
           </Button>
         </DialogActions>

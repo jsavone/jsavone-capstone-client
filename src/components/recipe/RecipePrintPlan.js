@@ -13,10 +13,9 @@ const styles = theme => ({
     margin: '0 auto',
     padding: 0,
     width: 670, /* width: 7in; */
-    height: 900, /* or height: 9.5in; */
-    clear: 'both',
-    pageBreakAfter: 'always',
+    minHeight: 900, /* or height: 9.5in; */
     whiteSpace: 'pre-line',
+    overflow: 'auto'
   },
   content: {
     width: '99%',
@@ -26,7 +25,16 @@ const styles = theme => ({
   header: {
     textAlign: 'center',
   },
-
+  logo: {
+    marginTop: 5,
+    height: 40,
+  },
+  circles: {
+    float: 'right',
+    height: 40,
+    marginTop: 5,
+    marginRight: 10,
+  }
 });
 
 const RecipePrintPlan = (props) => {
@@ -34,10 +42,12 @@ const RecipePrintPlan = (props) => {
 const { classes } = props;
 
   const currUser = {...props.user}
-  console.log(React.Children)
   return (
     <div className={classes.root}>
       <div className={classes.content}>
+      <img className={classes.logo} src="../../PreptasticLogoNavBar.png" alt="Preptastic Logo"/>
+      <img className={classes.circles} src="../../PreptasticCircles.png" alt="Preptastic Circles"/>
+      <Divider />
         <Grid container spacing={24}>
           <Grid item xs={5}>
             <h2 className={classes.header}>SHOPPING LIST</h2>

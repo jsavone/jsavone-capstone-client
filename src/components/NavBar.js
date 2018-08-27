@@ -24,6 +24,14 @@ const styles = {
     flexGrow: 1,
     marginBottom:10,
   },
+  navBar: {
+    backgroundColor: '#EEEEEE',
+  },
+  logo: {
+    marginTop: 5,
+    height: 55,
+    marginLeft: -10,
+  },
   flex: {
     flexGrow: 1,
   },
@@ -34,20 +42,23 @@ const styles = {
     marginLeft: 7,
     width: 250,
   },
+  panelTitle: {
+    marginTop: 8,
+    marginBottom: 5,
+  },
   rightList: {
     marginLeft: 7,
-    width: 360,
-  },
-  rightHeading: {
-    marginTop: 8,
-    marginBottom:8,
+    width: 400,
   },
   print: {
-    marginTop: 3,
-    marginBottom: 3,
+    marginTop: 5,
+    marginBottom: 5,
   },
   leftLink: {
     textDecoration: 'none',
+  },
+  icon: {
+    color: "#60B258",
   }
 };
 
@@ -85,7 +96,7 @@ class NavBar extends React.Component {
 
     const rightSideList = (
       <div className={classes.rightList}>
-        <h3 className={classes.rightHeading}>Food Plan</h3>
+        <Typography className={classes.panelTitle} variant="title">FOOD PLAN</Typography>
         <Divider />
         <RecipeFoodList user={this.props.user}/>
       </div>
@@ -93,7 +104,7 @@ class NavBar extends React.Component {
 
     const leftSideList = (
       <div className={classes.leftList}>
-        <h3>Shopping List</h3>
+        <Typography variant="title" className={classes.panelTitle}>SHOPPING LIST</Typography>
         <Divider />
         <Link className={classes.leftLink}to={`/plan/print/`} target="_blank">
           <Button variant="contained" color="primary" className={classes.print}>PRINT PLAN</Button>
@@ -106,11 +117,12 @@ class NavBar extends React.Component {
     return (
       <div className={classes.root}>
 
-        <AppBar position="static">
+        <AppBar position="static" className={classes.navBar}>
           <Toolbar>
-            <Typography variant="title" color="inherit" className={classes.flex}>
-              Preptastic
+            <Typography variant="title" className={classes.flex}>
+              <a href="/recipes" className={classes.navLink}><img src="../../PreptasticLogoNavBar.png" className={classes.logo} alt="Preptastic Logo"/></a>
             </Typography>
+
             {auth && (
               <div>
                 <IconButton
@@ -119,7 +131,7 @@ class NavBar extends React.Component {
                   onClick={this.handleMenu}
                   color="inherit"
                 >
-                  <AccountCircle />
+                  <AccountCircle className={classes.icon}/>
                 </IconButton>
                 <Menu
                   id="menu-appbar"
@@ -138,10 +150,10 @@ class NavBar extends React.Component {
                   <MenuItem onClick={()=>this.props.logout()}>Logout</MenuItem>
                 </Menu>
                 <IconButton onClick={this.toggleDrawer('left', true)} className={classes.menuButton} color="inherit" aria-label="Menu">
-                  <ShoppingCart />
+                  <ShoppingCart className={classes.icon} />
                 </IconButton>
                 <IconButton onClick={this.toggleDrawer('right', true)} className={classes.menuButton} color="inherit" aria-label="Menu">
-                  <CalendarIcon />
+                  <CalendarIcon className={classes.icon}/>
                 </IconButton>
               </div>
             )}

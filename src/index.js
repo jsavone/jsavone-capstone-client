@@ -6,6 +6,8 @@ import { Provider } from 'react-redux'
 import jwtDecode from 'jwt-decode';
 import { setCurrentUser } from './redux/authActions';
 import setAuthorizationToken from './redux/utils/setAuthorizationToken';
+import { createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
+import themeColors from './components/themeColors'
 import App from './App';
 import {
         fetchRecipes,
@@ -15,6 +17,9 @@ import {
         fetchComments,
        } from './redux/actions'
 
+  const theme = createMuiTheme({
+   ...themeColors
+  })
 
 let newStore = store()
 
@@ -30,7 +35,9 @@ if (localStorage.jwtToken) {
 
 ReactDOM.render(
   <Provider store={newStore}>
-  <App />
+    <MuiThemeProvider theme={theme} >
+      <App />
+    </MuiThemeProvider>
   </Provider>
 
   , document.getElementById('root'));

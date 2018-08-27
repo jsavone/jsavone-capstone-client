@@ -1,7 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { removeMeal } from '../../redux/actions'
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -13,76 +11,44 @@ icon: {
 }
 });
 
+const conversion = (obj) => {
+  let pounds = 0
+  let ounces = 0
+  if (obj.amount >=16 && obj.unit === 'oz') {
+    pounds = Math.floor(obj.amount / 16)
+    ounces = obj.amount % 16
+
+      let numPound = pounds === 1 ? 'lb' : 'lbs'
+      let result = pounds+numPound+(ounces!== 0 ? " "+ounces+'oz': '')
+      return result
+  }
+  if (obj.unit === 'each') {
+    return obj.amount
+  }
+  return obj.amount+" "+obj.unit
+}
+
 const RecipeShoppingList = (props) => {
 
   const { classes } = props;
 
   let currUser = props.user
 
+  const day = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday']
+
   let allIngredients = []
-  if (currUser.sundayBfast) {
-    allIngredients = [...allIngredients, ...currUser.sundayBfast.ingredients]
-  }
-  if (currUser.sundayLunch) {
-    allIngredients = [...allIngredients, ...currUser.sundayLunch.ingredients]
-  }
-  if (currUser.sundayDinner) {
-    allIngredients = [...allIngredients, ...currUser.sundayDinner.ingredients]
-  }
-  if (currUser.mondayBfast) {
-    allIngredients = [...allIngredients, ...currUser.mondayBfast.ingredients]
-  }
-  if (currUser.mondayLunch) {
-    allIngredients = [...allIngredients, ...currUser.mondayLunch.ingredients]
-  }
-  if (currUser.mondayDinner) {
-    allIngredients = [...allIngredients, ...currUser.mondayDinner.ingredients]
-  }
-  if (currUser.tuesdayBfast) {
-    allIngredients = [...allIngredients, ...currUser.tuesdayBfast.ingredients]
-  }
-  if (currUser.tuesdayLunch) {
-    allIngredients = [...allIngredients, ...currUser.tuesdayLunch.ingredients]
-  }
-  if (currUser.tuesdayDinner) {
-    allIngredients = [...allIngredients, ...currUser.tuesdayDinner.ingredients]
-  }
-  if (currUser.wednesdayBfast) {
-    allIngredients = [...allIngredients, ...currUser.wednesdayBfast.ingredients]
-  }
-  if (currUser.wednesdayLunch) {
-    allIngredients = [...allIngredients, ...currUser.wednesdayLunch.ingredients]
-  }
-  if (currUser.wednesdayDinner) {
-    allIngredients = [...allIngredients, ...currUser.wednesdayDinner.ingredients]
-  }
-  if (currUser.thursdayBfast) {
-    allIngredients = [...allIngredients, ...currUser.thursdayBfast.ingredients]
-  }
-  if (currUser.thursdayLunch) {
-    allIngredients = [...allIngredients, ...currUser.thursdayLunch.ingredients]
-  }
-  if (currUser.thursdayDinner) {
-    allIngredients = [...allIngredients, ...currUser.thursdayDinner.ingredients]
-  }
-  if (currUser.fridayBfast) {
-    allIngredients = [...allIngredients, ...currUser.fridayBfast.ingredients]
-  }
-  if (currUser.fridayLunch) {
-    allIngredients = [...allIngredients, ...currUser.fridayLunch.ingredients]
-  }
-  if (currUser.fridayDinner) {
-    allIngredients = [...allIngredients, ...currUser.fridayDinner.ingredients]
-  }
-  if (currUser.saturdayBfast) {
-    allIngredients = [...allIngredients, ...currUser.saturdayBfast.ingredients]
-  }
-  if (currUser.saturdayLunch) {
-    allIngredients = [...allIngredients, ...currUser.saturdayLunch.ingredients]
-  }
-  if (currUser.saturdayDinner) {
-    allIngredients = [...allIngredients, ...currUser.saturdayDinner.ingredients]
-  }
+
+  day.forEach(day => {
+    if (currUser[day+'Bfast']) {
+      allIngredients = [...allIngredients, ...currUser[day+'Bfast'].ingredients]
+    }
+    if (currUser[day+'Lunch']) {
+      allIngredients = [...allIngredients, ...currUser[day+'Lunch'].ingredients]
+    }
+    if (currUser[day+'Dinner']) {
+      allIngredients = [...allIngredients, ...currUser[day+'Dinner'].ingredients]
+    }
+  })
 
   let ingredientsObj = {}
   allIngredients.forEach(ing => {
@@ -97,7 +63,8 @@ const RecipeShoppingList = (props) => {
     }
   })
 
-  let ingredientsList = ingrArray.map(ingr => <div key={ingr._id}><List>{props.print ? <span><Box className={classes.icon}/>&nbsp;&nbsp;</span> : null}{ingr.amount} {ingr.unit} - {ingr.name}</List><Divider /></div>)
+  let ingredientsList = ingrArray.map(ingr => <div key={ingr._id}><List>{props.print ? <span><Box className={classes.icon}/>&nbsp;&nbsp;</span> : null}{conversion(ingr)} - {ingr.name}</List><Divider /></div>)
+
 
   return(
     <div className={classes.root}>
@@ -114,10 +81,6 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  removeMeal
-}, dispatch)
-
-const RecipeShoppingListConnect = connect(mapStateToProps, mapDispatchToProps)(RecipeShoppingList)
+const RecipeShoppingListConnect = connect(mapStateToProps, null)(RecipeShoppingList)
 
 export default withStyles(styles)(RecipeShoppingListConnect);

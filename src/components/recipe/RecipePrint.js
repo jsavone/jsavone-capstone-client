@@ -38,6 +38,16 @@ const styles = theme => ({
   },
   header: {
     marginTop: 10,
+  },
+  logo: {
+    marginTop: 5,
+    height: 40,
+  },
+  circles: {
+    float: 'right',
+    height: 40,
+    marginTop: 5,
+    marginRight: 10,
   }
 
 });
@@ -58,6 +68,9 @@ const { classes } = props;
   return (
     <div className={classes.root}>
       <div className={classes.content}>
+        <img className={classes.logo} src="../../PreptasticLogoNavBar.png" alt="Preptastic Logo"/>
+        <img className={classes.circles} src="../../PreptasticCircles.png" alt="Preptastic Circles"/>
+        <Divider />
         <Grid container spacing={24}>
           <Grid item xs={7}>
             <h1 className={classes.recipeTitle}>{currRecipe.title}</h1>
