@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles';
-import { bindActionCreators } from 'redux'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -66,10 +65,6 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-
-}, dispatch)
-
-const AdminRecipeDetailConnect = connect(mapStateToProps, mapDispatchToProps)(AdminRecipeDetail)
+const AdminRecipeDetailConnect = connect(mapStateToProps)(AdminRecipeDetail)
 
 export default withStyles(styles)(AdminRecipeDetailConnect)

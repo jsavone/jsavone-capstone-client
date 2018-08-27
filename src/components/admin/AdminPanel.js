@@ -12,29 +12,28 @@ const styles = theme => ({
   },
 });
 
-
 class AdminPanel extends Component {
 
-render() {
+  render() {
 
-  const { classes } = this.props;
+    const { classes } = this.props;
 
-  if (this.props.user.email) {
-    if (!this.props.user.admin) {
-      this.props.history.push('/login')
+    if (this.props.user.email) {
+      if (!this.props.user.admin) {
+        this.props.history.push('/login')
+      }
     }
-  }
 
-  return (
-    <div>
-      <AdminNavBar />
-      <AdminCreateBar />
-      <div className={classes.body}>
-        <AdminRecipeList admin={this.props.user}/>
+    return (
+      <div>
+        <AdminNavBar />
+        <AdminCreateBar />
+        <div className={classes.body}>
+          <AdminRecipeList admin={this.props.user}/>
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
 }
 
 const mapStateToProps = state => {

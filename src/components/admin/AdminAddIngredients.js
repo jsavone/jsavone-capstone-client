@@ -156,99 +156,99 @@ class AdminAddIngredients extends Component {
     });
   };
 
-handleClickOpenIngredient = () => {
-  this.setState({ ingredientOpen: true });
-};
+  handleClickOpenIngredient = () => {
+    this.setState({ ingredientOpen: true });
+  };
 
-handleCloseIngredient = () => {
-  this.setState({ ingredientOpen: false });
-};
+  handleCloseIngredient = () => {
+    this.setState({ ingredientOpen: false });
+  };
 
-handleSubmitIngredient = (id) => {
-  this.setState({ ingredientOpen: false });
-  let ingredient = {
-                      recipeId: this.props.recipeId,
-                      id: id,
-                      amount: this.state.amount
-                    }
+  handleSubmitIngredient = (id) => {
+    this.setState({ ingredientOpen: false });
+    let ingredient = {
+                        recipeId: this.props.recipeId,
+                        id: id,
+                        amount: this.state.amount
+                      }
 
-  this.props.addIngredient(ingredient)
-  this.setState({name: '', amount: ''})
-};
+    this.props.addIngredient(ingredient)
+    this.setState({name: '', amount: ''})
+  };
 
-render() {
-  suggestions = []
-     this.props.ingredients.map(ingredient => {
-       return suggestions.push({ label: ingredient.name })
-     })
+  render() {
+    suggestions = []
+       this.props.ingredients.map(ingredient => {
+         return suggestions.push({ label: ingredient.name })
+       })
 
-  let currIngredient = ''
-  if (this.state.name !== '') {
-    currIngredient = {...this.props.ingredients.filter(ingredient=> ingredient.name === this.state.name)[0]}
+    let currIngredient = ''
+    if (this.state.name !== '') {
+      currIngredient = {...this.props.ingredients.filter(ingredient=> ingredient.name === this.state.name)[0]}
+    }
+
+    const { classes } = this.props;
+
+    return (
+      <div>
+        <Button onClick={this.handleClickOpenIngredient} className={classes.claim} variant="contained" color="primary">Add Ingredient</Button>
+
+        <Dialog
+          open={this.state.ingredientOpen}
+          onClose={this.handleCloseIngredient}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Add Ingredient</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              {`Add ingredient to the existing recipe listing.`}
+            </DialogContentText>
+
+            <Autosuggest
+               theme={{
+                 container: classes.container,
+                 suggestionsContainerOpen: classes.suggestionsContainerOpen,
+                 suggestionsList: classes.suggestionsList,
+                 suggestion: classes.suggestion,
+               }}
+               renderInputComponent={renderInput}
+               suggestions={this.state.suggestions}
+               onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
+               onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
+               renderSuggestionsContainer={renderSuggestionsContainer}
+               getSuggestionValue={getSuggestionValue}
+               renderSuggestion={renderSuggestion}
+               inputProps={{
+                 classes,
+                 placeholder: 'Search Ingredients by Name',
+                 value: this.state.name,
+                 onChange: this.handleChange,
+               }}
+            />
+
+            {currIngredient !== '' ? <h3>per {currIngredient.unit}</h3> : null}
+
+            <TextField
+              margin="dense"
+              id="name"
+              label={"Amount"}
+              type="number"
+              color="default"
+              onChange={(e)=>this.setState({amount: e.target.value})}
+              value={this.state.amount}
+              fullWidth
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={()=>this.handleSubmitIngredient(currIngredient._id)} variant="contained" color="primary">
+              Add Ingredient
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+      </div>
+    )
   }
-
-  const { classes } = this.props;
-
-  return (
-    <div>
-      <Button onClick={this.handleClickOpenIngredient} className={classes.claim} variant="contained" color="primary">Add Ingredient</Button>
-
-      <Dialog
-        open={this.state.ingredientOpen}
-        onClose={this.handleCloseIngredient}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Add Ingredient</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            {`Add ingredient to the existing recipe listing.`}
-          </DialogContentText>
-
-          <Autosuggest
-             theme={{
-               container: classes.container,
-               suggestionsContainerOpen: classes.suggestionsContainerOpen,
-               suggestionsList: classes.suggestionsList,
-               suggestion: classes.suggestion,
-             }}
-             renderInputComponent={renderInput}
-             suggestions={this.state.suggestions}
-             onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
-             onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
-             renderSuggestionsContainer={renderSuggestionsContainer}
-             getSuggestionValue={getSuggestionValue}
-             renderSuggestion={renderSuggestion}
-             inputProps={{
-               classes,
-               placeholder: 'Search Ingredients by Name',
-               value: this.state.name,
-               onChange: this.handleChange,
-             }}
-          />
-
-          {currIngredient !== '' ? <h3>per {currIngredient.unit}</h3> : null}
-
-          <TextField
-            margin="dense"
-            id="name"
-            label={"Amount"}
-            type="number"
-            color="default"
-            onChange={(e)=>this.setState({amount: e.target.value})}
-            value={this.state.amount}
-            fullWidth
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={()=>this.handleSubmitIngredient(currIngredient._id)} variant="contained" color="primary">
-            Add Ingredient
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-    </div>
-  )
-}
 }
 
 const mapStateToProps = state => {

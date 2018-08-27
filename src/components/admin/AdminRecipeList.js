@@ -64,9 +64,7 @@ class AdminRecipeList extends Component {
           </Grid>
         </div>
       )
-
   }
-
 }
 
 const mapStateToProps = state => {
