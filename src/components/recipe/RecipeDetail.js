@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
-import NavBar from '../NavBar'
+import RecipeNavBar from './RecipeNavBar'
 import RecipeBottom from './RecipeBottom'
 import RecipeComments from './RecipeComments'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { addMeal } from '../../redux/actions'
+import { Link } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -9,10 +13,6 @@ import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { addMeal } from '../../redux/actions'
-import { Link } from 'react-router-dom'
 
 const styles = theme => ({
   body: {
@@ -108,9 +108,10 @@ class RecipeDetail extends Component {
     if(currRecipe.ingredients) {
       ingredientsList = currRecipe.ingredients.map(ingr => <div key={ingr._id}><List className={classes.ingredients}>{ingr.amount} {ingr.ingredientId.unit} - {ingr.ingredientId.name}</List><Divider /></div>)
     }
+
     return(
       <div>
-        <NavBar user={currUser}/>
+        <RecipeNavBar user={currUser}/>
         <div className={classes.body}>
         <Grid container spacing={24} className={classes.instructions}>
           <Grid item xs={6}>

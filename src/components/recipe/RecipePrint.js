@@ -6,14 +6,13 @@ import Box from '@material-ui/icons/CheckBoxOutlineBlank';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 
-
 const styles = theme => ({
   root: {
     border: '1px dashed black',
     margin: '0 auto',
     padding: 0,
-    width: 670, /* width: 7in; */
-    height: 900, /* or height: 9.5in; */
+    width: 670,
+    height: 900,
     clear: 'both',
     pageBreakAfter: 'always',
     whiteSpace: 'pre-line',
@@ -49,7 +48,6 @@ const styles = theme => ({
     marginTop: 5,
     marginRight: 10,
   }
-
 });
 
 const RecipePrint = (props) => {
@@ -89,7 +87,6 @@ const { classes } = props;
           <h3 className={classes.header}>Directions</h3>
           <p>{currRecipe.directions}</p>
       </div>
-      {currRecipe.title ? window.print() : null}
     </div>
   )
 }

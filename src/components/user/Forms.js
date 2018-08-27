@@ -1,5 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { login } from '../../redux/authActions'
+import { createUser } from '../../redux/actions'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -7,10 +11,6 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { login } from '../../redux/authActions'
-import { createUser } from '../../redux/actions'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import PersonIcon from '@material-ui/icons/Person';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Grow from '@material-ui/core/Grow';
@@ -62,7 +62,6 @@ const styles = theme => ({
     paddingTop:10,
     marginBottom: 10,
     fontWeight: 500,
-
   },
   success: {
     minHeight: 30,
@@ -78,8 +77,8 @@ const styles = theme => ({
   }
 });
 
-
 class Forms extends React.Component {
+
   state = {
     value: this.props.path === '/login' ? 1 : 0,
     email: 'annasavone@gmail.com',
@@ -253,7 +252,6 @@ class Forms extends React.Component {
                 Login
               </Button>
           </div>
-
 
           </TabContainer>}
       </div>

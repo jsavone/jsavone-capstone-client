@@ -6,7 +6,6 @@ import SignupNavBar from './user/SignupNavBar'
 import Forms from './user/Forms'
 import RecipeBottom from './recipe/RecipeBottom'
 
-
 const styles = {
   root: {
     flexGrow: 1,

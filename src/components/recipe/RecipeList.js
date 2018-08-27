@@ -63,7 +63,6 @@ const RecipeList = (props) => {
   );
 }
 
-
 const mapStateToProps = state => {
   return {
     recipes: state.recipes

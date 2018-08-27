@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Link } from 'react-router-dom'
 import { removeMeal } from '../../redux/actions'
 import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom'
 import Delete from '@material-ui/icons/DeleteRounded';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -127,7 +127,6 @@ const RecipeFoodList = (props) => {
       </Paper>
     )
   })
-
 
   return (
     <div>

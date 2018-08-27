@@ -34,7 +34,6 @@ export const fetchRecipes = () => {
   })
   return( dispatch) => {
     axiosInstance({ method: 'get', url: 'http://localhost:8000/recipes'})
-    /*axios.get('http://localhost:8000/recipes')*/
     .then((response) => {
       dispatch({
         type: FETCH_RECIPES,
@@ -109,7 +108,6 @@ export const createUser = (user) => {
     })
   }
 }
-
 
 export const createRecipe = (recipe) => {
   return( dispatch) => {

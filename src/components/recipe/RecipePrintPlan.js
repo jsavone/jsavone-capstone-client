@@ -1,19 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import RecipeShoppingList from './RecipeShoppingList'
+import RecipeFoodList from './RecipeFoodList'
 import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
-import RecipeShoppingList from './RecipeShoppingList'
-import RecipeFoodList from './RecipeFoodList'
-
 
 const styles = theme => ({
   root: {
     border: '1px dashed black',
     margin: '0 auto',
     padding: 0,
-    width: 670, /* width: 7in; */
-    minHeight: 900, /* or height: 9.5in; */
+    width: 670,
+    minHeight: 900,
     whiteSpace: 'pre-line',
     overflow: 'auto'
   },

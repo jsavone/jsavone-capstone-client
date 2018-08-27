@@ -1,4 +1,4 @@
-import { FETCH_INGREDIENTS, CREATE_INGREDIENT} from './actions'
+import { FETCH_INGREDIENTS, CREATE_INGREDIENT} from '../actions'
 
 let initialState = []
 

@@ -1,4 +1,4 @@
-import { FETCH_USER, CREATE_USER, ADD_MEAL, REMOVE_MEAL } from './actions'
+import { FETCH_USER, CREATE_USER, ADD_MEAL, REMOVE_MEAL } from '../actions'
 
 let initialState = {}
 

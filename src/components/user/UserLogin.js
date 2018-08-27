@@ -1,12 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { login } from '../../redux/authActions'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { login } from '../../redux/authActions'
 import { withStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-
 
 const styles = theme => ({
   container: {
@@ -24,19 +23,19 @@ const styles = theme => ({
   }
 });
 
-
 class UserLogin extends React.Component {
+
   state = {
     email: 'annasavone@gmail.com',
     password: 'pw',
   };
 
   render() {
+
     const { classes } = this.props;
 
     return (
       <div>
-
           <Typography variant="display1" className={classes.heading} gutterBottom>
            User Login
           </Typography>
@@ -71,17 +70,14 @@ class UserLogin extends React.Component {
           onClick={()=>this.props.login(this.state)
             .then(
             (res) => window.location = `/recipes`,
-            /*this.props.history.push(`/${this.state.email}/recipes`)*/
             (err) => this.setState({ errors: err.response.data.errors, isLoading: false })
-          )}
-          /*href={"/"+this.state.email+"/recipes/"}*/>
+          )}>
             Login
           </Button>
       </div>
     );
   }
 }
-
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   login

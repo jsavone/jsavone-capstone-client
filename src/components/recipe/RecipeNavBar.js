@@ -1,9 +1,9 @@
 import React from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { logout } from '../redux/authActions'
-import RecipeFoodList from './recipe/RecipeFoodList'
-import RecipeShoppingList from './recipe/RecipeShoppingList'
+import { logout } from '../../redux/authActions'
+import RecipeFoodList from '../recipe/RecipeFoodList'
+import RecipeShoppingList from '../recipe/RecipeShoppingList'
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';

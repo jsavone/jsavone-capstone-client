@@ -1,12 +1,11 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
-import recipes from './recipesReducer'
-import categories from './categoriesReducer'
-import ingredients from './ingredientsReducer'
-import comments from './commentsReducer'
-import auth from './authReducer';
-import user from './userReducer'
+import recipes from './reducers/recipesReducer'
+import categories from './reducers/categoriesReducer'
+import ingredients from './reducers/ingredientsReducer'
+import comments from './reducers/commentsReducer'
+import auth from './reducers/authReducer';
+import user from './reducers/userReducer'
 import thunk from 'redux-thunk'
-
 
 const rootReducer = combineReducers({
   recipes,

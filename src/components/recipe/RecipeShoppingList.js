@@ -65,11 +65,9 @@ const RecipeShoppingList = (props) => {
 
   let ingredientsList = ingrArray.map(ingr => <div key={ingr._id}><List>{props.print ? <span><Box className={classes.icon}/>&nbsp;&nbsp;</span> : null}{conversion(ingr)} - {ingr.name}</List><Divider /></div>)
 
-
   return(
     <div className={classes.root}>
       {ingredientsList.length > 0 ? ingredientsList : <h2>Add meals to your calendar to build a shopping list!</h2>}
-      {ingredientsList.length > 1 && props.print ? window.print() : null}
     </div>
   )
 }

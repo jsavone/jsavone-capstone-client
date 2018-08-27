@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
+import RecipeNavBar from './RecipeNavBar'
+import RecipeList from './RecipeList'
+import RecipeBottom from './RecipeBottom'
+import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Search from '@material-ui/icons/Search';
-import NavBar from '../NavBar'
-import RecipeList from './RecipeList'
-import RecipeBottom from './RecipeBottom'
-import { connect } from 'react-redux'
-
 
 const styles = theme => ({
   container: {
@@ -40,7 +39,7 @@ class RecipePicker extends Component {
 
       return (
         <div>
-          <NavBar />
+          <RecipeNavBar />
             <form className={classes.container} noValidate autoComplete="off">
               <TextField
                 id="search"
@@ -89,7 +88,6 @@ class RecipePicker extends Component {
 
 }
 
-
 const mapStateToProps = state => {
   return {
     recipes: state.recipes,
@@ -98,7 +96,6 @@ const mapStateToProps = state => {
     auth: state.auth
   }
 }
-
 
 let RecipePickerConnect = connect(mapStateToProps)(RecipePicker)
 

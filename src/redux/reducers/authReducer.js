@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER } from './authActions';
+import { SET_CURRENT_USER } from '../authActions';
 import isEmpty from 'lodash/isEmpty';
 
 const initialState = {

@@ -12,7 +12,6 @@ const styles = {
   flex: {
     flexGrow: 1,
   },
-
   logo: {
     marginTop: 6,
     height: 55,
