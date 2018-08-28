@@ -6,7 +6,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
+import AddCircle from '@material-ui/icons/AddCircle';
 
 const styles = theme => ({
   root: {
@@ -52,7 +52,7 @@ const RecipeList = (props) => {
               subtitle={<span><a href={tile._id} className={classes.link}>Cook time: {tile.cookTime}</a></span>}
               actionIcon={
                 <IconButton className={classes.icon} href={'/recipes/'+tile._id}>
-                  <InfoIcon />
+                  <AddCircle color="primary" />
                 </IconButton>
               }
             />
