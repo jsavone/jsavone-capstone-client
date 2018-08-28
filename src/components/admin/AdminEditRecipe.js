@@ -59,6 +59,7 @@ class AdminEditRecipe extends Component{
 
     let thisRecipe = {...this.props.recipes.filter(recipe=> recipe._id === this.props.match.params.id)[0]}
 
+
     if (thisRecipe.ingredients !== undefined) {
       currIngredients = [...thisRecipe.ingredients].map(ing => <div key={ing._id}><List>{ing.amount} {ing.ingredientId.unit} - {ing.ingredientId.name} - <span className={classes.remove} onClick={()=>this.props.removeIngredient({recipeId: thisRecipe._id, id: ing._id})}><Delete className={classes.delete}/></span></List><Divider /></div>)
     }
@@ -68,12 +69,11 @@ class AdminEditRecipe extends Component{
     }
 
     if (thisRecipe.comments) {
-      currComments = [...thisRecipe.comments].map(com=> {
-        let user = this.props.user
-        return <div key={com._id}><p>{com.comment}</p><p>by {user.firstName} {user.lastName} - <span className={classes.remove} onClick={()=>this.props.removeComment({recipe: thisRecipe._id, comment: com._id})}><Delete className={classes.delete}/></span></p><Divider /></div>
+      currComments = this.props.comments.filter(comment=> comment.recipe._id === thisRecipe._id).map(com=> {
+        return <div key={com._id}><p>{com.comment}</p><p>by {com.user.firstName} {com.user.lastName} - <span className={classes.remove} onClick={()=>this.props.removeComment({recipe: thisRecipe._id, comment: com._id})}><Delete className={classes.delete}/></span></p><Divider /></div>
       })
     }
-    
+
     return(
       <div>
         <AdminNavBar />
@@ -126,6 +126,7 @@ const mapStateToProps = state => {
     categories: state.categories,
     ingredients: state.ingredients,
     user: state.user,
+    comments: state.comments
   }
 }
 

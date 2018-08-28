@@ -99,7 +99,6 @@ class Forms extends React.Component {
     if(this.state.email === '' || this.state.password === '') {
       return this.setState({error: 'PLEASE ENTER A USERNAME AND PASSWORD', checked: true})
     }
-
     this.props.login(this.state)
       .then(
       (res) => window.location = `/recipes`,
@@ -110,6 +109,9 @@ class Forms extends React.Component {
   handleSignup = (e) => {
     if(this.state.password !== this.state.conf_pw) {
       return this.setState({error: 'CONFIRMATION PASSWORD DOES NOT MATCH', checked: true})
+    }
+    if(this.state.password.length < 6) {
+      return this.setState({error: 'PASSWORD MUST BE AT LEAST 6 CHARACTERS IN LENGTH', checked: true})
     }
 
     this.props.createUser(this.state)

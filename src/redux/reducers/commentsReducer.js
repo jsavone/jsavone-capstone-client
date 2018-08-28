@@ -1,4 +1,4 @@
-import { FETCH_COMMENTS, ADD_COMMENT } from '../actions'
+import { FETCH_COMMENTS, ADD_COMMENT, REMOVE_COMMENT } from '../actions'
 
 let initialState = []
 
@@ -7,6 +7,8 @@ export default (state=initialState, action) => {
     case FETCH_COMMENTS:
       return [...action.payload]
     case ADD_COMMENT:
+      return [...action.payload]
+    case REMOVE_COMMENT:
       return [...action.payload]
     default:
       return state
