@@ -31,7 +31,7 @@ const styles = theme => ({
   root: {
     margin: '0 auto',
     marginBottom: 30,
-    width: '50%',
+    width: '60%',
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },

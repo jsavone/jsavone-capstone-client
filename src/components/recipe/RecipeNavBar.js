@@ -17,20 +17,25 @@ import Menu from '@material-ui/core/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
+import ExitToApp from '@material-ui/icons/ExitToApp';
 import { Link } from 'react-router-dom'
 
 const styles = {
   root: {
     flexGrow: 1,
     marginBottom:10,
+
   },
   navBar: {
     backgroundColor: '#EEEEEE',
   },
   logo: {
     marginTop: 5,
-    height: 55,
+    maxHeight: 55,
+    maxWidth: 240,
+    width: "100%",
     marginLeft: -10,
+
   },
   flex: {
     flexGrow: 1,
@@ -48,7 +53,7 @@ const styles = {
   },
   rightList: {
     marginLeft: 7,
-    width: 400,
+    width: 350,
   },
   print: {
     marginTop: 5,
@@ -59,7 +64,15 @@ const styles = {
   },
   icon: {
     color: "#60B258",
-  }
+  },
+  iconsDiv: {
+    minWidth: 144,
+  },
+  close: {
+    cursor: 'pointer',
+    float: 'right',
+    marginRight: 15,
+  },
 };
 
 class NavBar extends React.Component {
@@ -96,7 +109,9 @@ class NavBar extends React.Component {
 
     const rightSideList = (
       <div className={classes.rightList}>
-        <Typography className={classes.panelTitle} variant="title">FOOD PLAN</Typography>
+        <Typography className={classes.panelTitle} variant="title">FOOD PLAN
+          <ExitToApp className={classes.close}onClick={this.toggleDrawer('right', false)} />
+        </Typography>
         <Divider />
         <RecipeFoodList user={this.props.user}/>
       </div>
@@ -104,7 +119,9 @@ class NavBar extends React.Component {
 
     const leftSideList = (
       <div className={classes.leftList}>
-        <Typography variant="title" className={classes.panelTitle}>SHOPPING LIST</Typography>
+        <Typography variant="title" className={classes.panelTitle}>SHOPPING LIST
+          <ExitToApp className={classes.close}onClick={this.toggleDrawer('left', false)} />
+        </Typography>
         <Divider />
         <Link className={classes.leftLink}to={`/plan/print/`} target="_blank">
           <Button variant="contained" color="primary" className={classes.print}>PRINT PLAN</Button>
@@ -119,12 +136,12 @@ class NavBar extends React.Component {
 
         <AppBar position="static" className={classes.navBar}>
           <Toolbar>
-            <Typography variant="title" className={classes.flex}>
+            <div className={classes.flex}>
               <a href="/recipes" className={classes.navLink}><img src="../../PreptasticLogoNavBar.png" className={classes.logo} alt="Preptastic Logo"/></a>
-            </Typography>
+            </div>
 
             {auth && (
-              <div>
+              <div className={classes.iconsDiv}>
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : null}
                   aria-haspopup="true"

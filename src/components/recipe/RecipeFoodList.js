@@ -58,6 +58,10 @@ const styles = theme => ({
     textDecoration: 'none',
     color: 'black',
     fontWeight: 500,
+  },
+  meal: {
+    width: 50,
+    paddingRight: 0,
   }
 });
 
@@ -83,7 +87,7 @@ const RecipeFoodList = (props) => {
         <Table className={classes.table}>
           <TableBody>
             <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
+              <CustomTableCell className={classes.meal} component="th" scope="row">
                 Breakfast
               </CustomTableCell>
               <CustomTableCell numeric>
@@ -97,7 +101,7 @@ const RecipeFoodList = (props) => {
               </CustomTableCell>
             </TableRow>
             <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
+              <CustomTableCell className={classes.meal} component="th" scope="row">
                 Lunch
               </CustomTableCell>
               <CustomTableCell numeric>
@@ -110,7 +114,7 @@ const RecipeFoodList = (props) => {
               </CustomTableCell>
             </TableRow>
             <TableRow className={classes.row} >
-              <CustomTableCell component="th" scope="row">
+              <CustomTableCell className={classes.meal} component="th" scope="row">
                 Dinner
               </CustomTableCell>
               <CustomTableCell numeric>

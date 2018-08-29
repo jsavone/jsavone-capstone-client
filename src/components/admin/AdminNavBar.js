@@ -23,8 +23,10 @@ const styles = {
     color: '#67B55F'
   },
   logo: {
-    marginTop: 0,
-    height: 55,
+    marginTop: 5,
+    maxHeight: 55,
+    maxWidth: 240,
+    width: "100%",
     marginLeft: -10,
   },
 };

@@ -15,14 +15,18 @@ const styles = theme => ({
   },
   paper: {
     padding: theme.spacing.unit * 2,
+    minWidth: 360,
     textAlign: 'center',
   },
-  img: {
-    width:  400,
-    height: 300,
+  imgDiv: {
     backgroundPosition:'50% 50%',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
+    marginBottom: 5,
+  },
+  img: {
+    width:  350,
+    height: 250,
   },
   table: {
     width: '100%',
@@ -45,7 +49,9 @@ class AdminRecipeDetail extends Component {
         <Typography variant="headline" gutterBottom>
             {thisRecipe.title ? thisRecipe.title.toUpperCase() : null}
         </Typography>
-        <p><img className={classes.img} src={thisRecipe.img} alt={thisRecipe.title} /></p>
+        <div className={classes.imgDiv}>
+          <img className={classes.img} src={thisRecipe.img} alt={thisRecipe.title} />
+        </div>
         <Button
          variant="contained"
          color="primary"

@@ -13,6 +13,10 @@ import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import CalendarIcon from '@material-ui/icons/CalendarTodayRounded';
 
 const styles = theme => ({
   body: {
@@ -55,7 +59,14 @@ const styles = theme => ({
   },
   title: {
     color: '#424242'
-  }
+  },
+  popup: {
+    textAlign: 'center'
+  },
+  check: {
+    fontSize: 50,
+    marginBottom: 7,
+  },
 });
 
 const day = [
@@ -77,8 +88,17 @@ const meal = [
 class RecipeDetail extends Component {
   state = {
     day: '',
-    meal: ''
+    meal: '',
+    open: false,
   }
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false, day: '', meal: '' });
+  };
 
   handleChange = name => event => {
      this.setState({
@@ -87,6 +107,7 @@ class RecipeDetail extends Component {
    };
 
   handleSubmitMeal = (recipe, user) => {
+    this.handleClickOpen()
     let newMeal = {
                     user_id: user,
                     meal: this.state.day+this.state.meal,
@@ -94,8 +115,8 @@ class RecipeDetail extends Component {
                   }
 
     this.props.addMeal(newMeal)
-    this.setState({day: '', meal: ''})
   }
+
   render() {
 
     const { classes } = this.props;
@@ -129,7 +150,7 @@ class RecipeDetail extends Component {
         <h1 className={classes.title}>{currRecipe.title ? currRecipe.title.toUpperCase(): null}</h1>
         <Grid container spacing={24}>
           <Grid item xs={12} sm={8}>
-          {currRecipe.video ? <iframe width="100%" height="315" title={currRecipe.title} src={`https://www.youtube.com/embed/${currRecipe.video}?rel=0&amp;showinfo=0`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
+          {currRecipe.video ? <iframe width="98%" height="315" title={currRecipe.title} src={`https://www.youtube.com/embed/${currRecipe.video}?rel=0&amp;showinfo=0`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
           : null }
           </Grid>
 
@@ -184,6 +205,22 @@ class RecipeDetail extends Component {
           </Grid>
         </Grid>
         <br/>
+          <Dialog
+            open={this.state.open}
+            onClose={this.handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle className={classes.popup} id="alert-dialog-title">
+            <div><CalendarIcon className={classes.check} color="primary" /></div>
+            {`${currRecipe.title} has been added to ${this.state.day.charAt(0).toUpperCase()+this.state.day.substr(1)} ${this.state.meal === 'Bfast' ? 'Breakfast' : this.state.meal}`}
+            </DialogTitle>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary" variant="contained" autoFocus>
+                OK
+              </Button>
+            </DialogActions>
+          </Dialog>
         <Divider />
 
         <Grid container spacing={24} className={classes.instructions}>

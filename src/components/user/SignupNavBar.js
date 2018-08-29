@@ -13,8 +13,10 @@ const styles = {
     flexGrow: 1,
   },
   logo: {
-    marginTop: 6,
-    height: 55,
+    marginTop: 7,
+    maxHeight: 55,
+    maxWidth: 240,
+    width: "100%",
     marginLeft: -10,
   },
   signup: {

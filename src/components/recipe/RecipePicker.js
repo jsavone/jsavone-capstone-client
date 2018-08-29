@@ -8,6 +8,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Search from '@material-ui/icons/Search';
+import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
   container: {
@@ -18,10 +19,10 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: "75%",
+    width: "100%",
   },
   select: {
-    width: "23%"
+    width: "100%"
   },
 });
 
@@ -41,6 +42,8 @@ class RecipePicker extends Component {
         <div>
           <RecipeNavBar />
             <form className={classes.container} noValidate autoComplete="off">
+            <Grid container spacing={24}>
+            <Grid item xs={12} sm={7}>
               <TextField
                 id="search"
                 label="Search recipes by name"
@@ -57,7 +60,8 @@ class RecipePicker extends Component {
                   ),
                 }}
               />
-
+              </Grid>
+              <Grid item xs={12} sm={5}>
               <TextField
                  id="category"
                  select
@@ -78,6 +82,8 @@ class RecipePicker extends Component {
                    </MenuItem>
                  ))}
                 </TextField>
+                </Grid>
+                </Grid>
               </form>
 
           <RecipeList search={this.state.search} category={this.state.category}/>
