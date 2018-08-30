@@ -19,7 +19,7 @@ const styles = theme => ({
   },
   container: {
     textAlign: 'center',
-    marginBottom: 10,
+    marginBottom: 24,
   }
 });
 
