@@ -20,6 +20,7 @@ const styles = theme => ({
     whiteSpace: 'pre-line',
     margin: '0 auto',
     width: '98%',
+    color: '#424242',
   },
   img: {
     width: '90%',

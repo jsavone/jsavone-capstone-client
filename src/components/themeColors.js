@@ -4,13 +4,13 @@ const themeColors = {
       light: '#dbffa4',
       main: '#A8CC74',
       dark: '#60B258',
-      contrastText: '#0f0f0f',
+      contrastText: '#424242',
     },
     secondary: {
       light: '#ffffff',
       main: '#eeeeee',
       dark: '#bcbcbc',
-      contrastText: '#0f0f0f',
+      contrastText: '#424242',
     },
     background: {
       paper: '#F5F5F5',

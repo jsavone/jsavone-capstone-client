@@ -25,6 +25,7 @@ const styles = {
   title: {
     fontSize: 20,
     marginBottom: -20,
+    color: '#424242',
   },
   button: {
     margin: '0 auto',

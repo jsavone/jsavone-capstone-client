@@ -11,13 +11,14 @@ import Button from '@material-ui/core/Button';
 const styles = {
   navBar: {
     backgroundColor: '#EEEEEE',
-    height: 66
+    height: 66,
   },
   root: {
     flexGrow: 1,
   },
   flex: {
     flexGrow: 1,
+    color: '#424242',
   },
   navButton: {
     color: '#67B55F'
