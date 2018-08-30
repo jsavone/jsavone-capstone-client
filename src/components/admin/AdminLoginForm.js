@@ -30,8 +30,8 @@ const styles = theme => ({
 
 class AdminLoginForm extends React.Component {
   state = {
-    email: 'annasavone@gmail.com',
-    password: 'pw',
+    email: '',
+    password: '',
   };
 
   render() {
@@ -45,7 +45,7 @@ class AdminLoginForm extends React.Component {
           <TextField
             required
             id="email"
-            label="email"
+            label="Email"
             type="email"
             className={classes.textField}
             value={this.state.email}

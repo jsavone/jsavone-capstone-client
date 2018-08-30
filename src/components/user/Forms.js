@@ -31,7 +31,7 @@ const styles = theme => ({
   root: {
     margin: '0 auto',
     marginBottom: 30,
-    width: '60%',
+    width: '65%',
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },
@@ -81,8 +81,8 @@ class Forms extends React.Component {
 
   state = {
     value: this.props.path === '/login' ? 1 : 0,
-    email: 'annasavone@gmail.com',
-    password: 'pw',
+    email: '',
+    password: '',
     conf_pw: '',
     firstName: '',
     lastName: '',

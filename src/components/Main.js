@@ -9,10 +9,10 @@ import RecipeBottom from './recipe/RecipeBottom'
 const styles = {
   root: {
     flexGrow: 1,
-    marginBottom: 20,
+    paddingBottom: 70,
     background: 'url(https://images.pexels.com/photos/53512/vegetables-food-red-pepper-red-53512.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) no-repeat center center fixed',
     backgroundSize: 'cover',
-    height: 925
+    height: 950,
   },
   paper: {
     margin: '0 auto',
