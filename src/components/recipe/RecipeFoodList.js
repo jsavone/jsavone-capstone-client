@@ -29,6 +29,7 @@ const styles = theme => ({
   },
   table: {
     width: '100%',
+    color: '#424242',
   },
   row: {
     '&:nth-of-type(odd)': {
@@ -56,12 +57,13 @@ const styles = theme => ({
   },
   link: {
     textDecoration: 'none',
-    color: 'black',
+    color: '#424242',
     fontWeight: 500,
   },
   meal: {
     width: 50,
     paddingRight: 0,
+    color: '#424242',
   }
 });
 

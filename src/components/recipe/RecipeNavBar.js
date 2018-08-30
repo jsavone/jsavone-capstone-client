@@ -50,6 +50,7 @@ const styles = {
   panelTitle: {
     marginTop: 8,
     marginBottom: 5,
+    color: '#424242',
   },
   rightList: {
     marginLeft: 7,
@@ -72,6 +73,7 @@ const styles = {
     cursor: 'pointer',
     float: 'right',
     marginRight: 15,
+    color: '#424242',
   },
 };
 

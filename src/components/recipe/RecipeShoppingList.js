@@ -8,6 +8,9 @@ import Box from '@material-ui/icons/CheckBoxOutlineBlank';
 const styles = theme => ({
 icon: {
   marginBottom: -6,
+},
+root: {
+  color: '#424242',
 }
 });
 
