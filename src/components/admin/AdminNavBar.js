@@ -40,7 +40,7 @@ const AdminNavBar = (props) => {
         <Toolbar>
         <img src="../../PreptasticLogoNavBar.png" className={classes.logo} alt="Preptastic Logo"/>
           <Typography variant="title" className={classes.flex}>
-           &nbsp;&nbsp;| ADMIN PANNEL
+           &nbsp;&nbsp;| ADMIN PANEL
           </Typography>
           <Button className={classes.navButton} color="primary" variant="outlined" onClick={()=> props.logout()}>Logout</Button>
         </Toolbar>
