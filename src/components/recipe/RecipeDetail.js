@@ -108,6 +108,11 @@ class RecipeDetail extends Component {
 
   handleSubmitMeal = (recipe, user) => {
     this.handleClickOpen()
+
+    if (!this.state.day && !this.state.meal) {
+      return
+    }
+
     let newMeal = {
                     user_id: user,
                     meal: this.state.day+this.state.meal,
@@ -213,7 +218,7 @@ class RecipeDetail extends Component {
           >
             <DialogTitle className={classes.popup} id="alert-dialog-title">
             <div><CalendarIcon className={classes.check} color="primary" /></div>
-            {`${currRecipe.title} has been added to ${this.state.day.charAt(0).toUpperCase()+this.state.day.substr(1)} ${this.state.meal === 'Bfast' ? 'Breakfast' : this.state.meal}`}
+            { this.state.day && this.state.meal ? `${currRecipe.title} has been added to ${this.state.day.charAt(0).toUpperCase()+this.state.day.substr(1)} ${this.state.meal === 'Bfast' ? 'Breakfast' : this.state.meal}` : "You must select a day and meal" }
             </DialogTitle>
             <DialogActions>
               <Button onClick={this.handleClose} color="primary" variant="contained" autoFocus>
