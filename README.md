@@ -4,6 +4,8 @@ Preptastic is a meal planning application that allows you to search through reci
 
 The server for this app can be cloned from [HERE](https://github.com/jsavone/jsavone-capstone-server)
 
+View the video demo of Preptastic [HERE](https://youtu.be/38-Vda10730)
+
 ## Technologies Used
 ### Front End
 - React & Redux
