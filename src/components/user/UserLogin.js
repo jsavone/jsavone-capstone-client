@@ -26,8 +26,8 @@ const styles = theme => ({
 class UserLogin extends React.Component {
 
   state = {
-    email: 'annasavone@gmail.com',
-    password: 'pw',
+    email: '',
+    password: '',
   };
 
   render() {
